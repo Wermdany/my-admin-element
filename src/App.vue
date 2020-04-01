@@ -1,29 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <el-scrollbar wrap-class="scorllbar" :noresize="true" style="height: 100%;">
+      <ul>
+        <li v-for="i in 100" :key="i">{{ i }}</li>
+      </ul>
+    </el-scrollbar>
   </div>
 </template>
-
-<style lang="less">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import { mapMutations } from "vuex";
+import { Scrollbar } from "element-ui";
+export default {
+  components: {
+    elScrollbar: Scrollbar
+  },
+  methods: {
+    ...mapMutations(["changeConfig"]),
+    changeAllSize(size) {
+      this.changeConfig({ size });
+      console.log(this);
     }
+  },
+  created() {
+    console.log(this);
   }
+};
+</script>
+<style>
+#app {
+  height: 100%;
+  overflow: hidden;
+  min-height: auto;
+}
+.el-scrollbar__wrap.scorllbar {
+  max-height: 100vh;
+  overflow-x: hidden;
 }
 </style>
