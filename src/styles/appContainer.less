@@ -1,0 +1,15 @@
+// 内容主体布局 默认设置
+.main-container{
+  margin-left: @sideBarWidth !important;
+  transition: margin-left .28s;
+}
+// 隐藏侧边栏的时候
+.hidden-sidebar{
+  .main-container{
+    margin-left: 64px !important;
+  }
+}
+// 固定头部的时候
+.header-container{
+  transition: width .28s;
+}

@@ -1,13 +1,13 @@
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router";
-import store from "./store/store";
+import router from "@/router";
+import store from "@/store";
 
+import "@/styles/index.less";
 Vue.config.productionTip = false;
-/**
- * 注入原型
- */
-Vue.prototype.$ELEMENT = store.getters.getConfig;
+import { Message } from "element-ui";
+Vue.prototype.$message = Message;
+Vue.prototype.$ELEMENT = { size: localStorage.getItem("size") || "small" };
 new Vue({
   router,
   store,
