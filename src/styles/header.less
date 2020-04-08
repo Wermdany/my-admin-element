@@ -12,28 +12,75 @@
     margin-top: 50px;
 }
 // header
+
 .navbar{
-  .hamburger,.app-breadcrumb{
-    float: left;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    .hamburger,.app-breadcrumb{
+      float: left;
+    }
+    .el-dropdown{
+      height: 100%;
+    }
+    .nav-menu--right {
+    float: right;
+    height: 100%;
+    margin-right: 18px;
   }
 }
+
 // right item 
-.size-icon-item {
+.header-icon-item {
   display: inline-block;
   width: 50px;
   height: 50px;
   font-size: 20px;
   padding: 0 15px;
-  line-height: 50px;
+  position: relative;
+  vertical-align: text-bottom;
   cursor: pointer;
   &:hover {
     background: rgba(0, 0, 0, 0.025);
+  }
+  // 下拉提示
+  i.tips{
+    position: absolute;
+    font-size: 12px;
+    right: 3px;
+    bottom: 5px;
+  }
+  &.user{
+   user-select: none;
+   font-size: 14px;
+   width: auto;
+    &.un-login{ 
+      color: #bbb;
+    }
+    &.login{
+     
+      &>img{ 
+      margin-top: 5px;
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    }
   }
 }
 // setting-dialog
 .setting--dialog{
   .el-dialog__header{
-    display: none;
+    padding:10px;
+    border-bottom: 1px solid #ededed;
+    text-align: center;
+    &>span{
+      font-size: 16px;
+    }
   }
   .el-dialog__body{
     padding: 15px;

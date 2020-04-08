@@ -5,6 +5,7 @@
     <div class="nav-menu--right">
       <size-selete />
       <setting />
+      <user />
     </div>
   </nav>
 </template>
@@ -12,6 +13,7 @@
 import Hamburger from "@/components/Hamburger";
 import Breadcrumb from "@/components/Breadcrumb";
 import SizeSelete from "@/components/SizeSelect";
+import User from "@/components/User";
 import Setting from "@/layouts/components/Settings";
 import { mapState } from "vuex";
 export default {
@@ -20,7 +22,8 @@ export default {
     Hamburger,
     Breadcrumb,
     SizeSelete,
-    Setting
+    Setting,
+    User
   },
   computed: {
     ...mapState({
@@ -34,16 +37,3 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped>
-.navbar {
-  height: 50px;
-  background: #fff;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
-.nav-menu--right {
-  float: right;
-  margin-right: 18px;
-}
-</style>

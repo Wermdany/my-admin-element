@@ -1,28 +1,30 @@
 <template>
-  <div class="size-icon-item" @click.stop="handleVisible">
-    <el-tooltip
-      class="item"
-      effect="dark"
-      content="修改全局设置"
-      placement="bottom"
-      :enterable="false"
-      :open-delay="openDelay"
-    >
+  <el-tooltip
+    style="vertical-align:top;"
+    effect="dark"
+    content="修改全局设置"
+    placement="bottom"
+    :enterable="false"
+    :open-delay="openDelay"
+  >
+    <div class="header-icon-item" @click.stop="handleVisible">
       <i class="el-icon-s-operation"></i>
-    </el-tooltip>
-    <el-dialog
-      :visible.sync="visible"
-      lock-scroll
-      append-to-body
-      custom-class="setting--dialog"
-      width="180px"
-    >
-      <div class="setting-item">
-        <span>固定头部：</span>
-        <el-switch v-model="fixedHeader" class="switch"></el-switch>
-      </div>
-    </el-dialog>
-  </div>
+      <el-dialog
+        :visible.sync="visible"
+        lock-scroll
+        append-to-body
+        custom-class="setting--dialog"
+        width="300px"
+        :show-close="false"
+        title="系统设置"
+      >
+        <div class="setting-item">
+          <span>固定头部：</span>
+          <el-switch v-model="fixedHeader" class="switch"></el-switch>
+        </div>
+      </el-dialog>
+    </div>
+  </el-tooltip>
 </template>
 <script>
 import { Tooltip, Dialog, Switch } from "element-ui";
@@ -54,7 +56,6 @@ export default {
   },
   methods: {
     handleVisible() {
-      console.log(1);
       this.visible = true;
     }
   }

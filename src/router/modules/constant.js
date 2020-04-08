@@ -22,13 +22,28 @@ const constent = [
     path: "/asd",
     component: "main",
     redirect: "/asd/dfg",
-    meta: { title: "综合" },
+    meta: { title: "综合", icon: "user" },
     children: [
       {
         path: "dfg",
         name: "dfg",
         component: "index",
-        meta: { title: "测试", icon: "eleme" }
+        meta: { title: "测试", icon: "eleme" },
+        redirect: "/asd/dfg/dfg",
+        children: [
+          {
+            path: "dfg",
+            name: "dfg",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga",
+            name: "dfga",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          }
+        ]
       },
       {
         path: "qw",

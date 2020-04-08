@@ -8,8 +8,9 @@
       :enterable="false"
       :open-delay="openDelay"
     >
-      <div class="size-icon-item">
+      <div class="header-icon-item">
         <i class="el-icon-menu"></i>
+        <i class="el-icon-caret-bottom tips" />
       </div>
     </el-tooltip>
     <el-dropdown-menu slot="dropdown">
@@ -42,7 +43,6 @@ export default {
     this.openDelay = 800;
     return {
       sizeOptions: [
-        { label: "默认", value: "small" },
         { label: "大型", value: "medium" },
         { label: "中等", value: "small" },
         { label: "小型", value: "mini" }

@@ -31,9 +31,13 @@
   .hidden-sidebar .el-menu--collapse .el-submenu>.el-submenu__title>.el-submenu__icon-arrow{
     display: none;
   }
-  // 在折叠情况下，如果子菜单被选择那么父菜单也会被标蓝
+  // 在折叠情况下，如果子菜单被选择那么父菜单也会被标选中
    .hidden-sidebar .el-menu--collapse .el-submenu.is-active>.el-submenu__title>i{
    color: @menuActiveText !important;
+  }
+  // 在折叠情况下，多层嵌套的菜单，应该也层层的被选中
+  .el-menu.el-menu--popup .el-submenu.is-active span ,.el-menu.el-menu--popup .el-submenu.is-active i:first-child{
+     color: @menuActiveText !important;
   }
   .hidden-sidebar{
      .sidebar-container{
