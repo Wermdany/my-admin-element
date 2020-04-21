@@ -7,7 +7,7 @@ import "@/styles/index.less";
 Vue.config.productionTip = false;
 import { Message } from "element-ui";
 Vue.prototype.$message = Message;
-Vue.prototype.$ELEMENT = { size: localStorage.getItem("size") || "small" };
+Vue.prototype.$ELEMENT = { size: localStorage.getItem("size") || "medium" };
 new Vue({
   router,
   store,

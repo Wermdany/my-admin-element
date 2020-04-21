@@ -12,3 +12,6 @@ export function setValue(obj, key, value) {
   }
   return eval(`obj.${key}=(${value})`);
 }
+export function requestAll(promiseObj) {
+  let res = {};
+}

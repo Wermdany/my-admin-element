@@ -1,0 +1,172 @@
+<template>
+  <div class="login-contianer">
+    <el-form :model="form" size="medium" ref="form" :rules="rules">
+      <div class="login__logo">
+        <img class="logo" src="@/assets/logo.png" alt="" />
+      </div>
+      <div class="login__title">My-Admin-Element</div>
+      <el-form-item prop="userName">
+        <span class="icon"><i class="el-icon-user-solid"></i></span>
+        <el-input
+          v-model="form.userName"
+          placeholder="请输入用户名"
+          autofocus
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="passWord">
+        <span class="icon"><i class="el-icon-message-solid"></i></span>
+        <el-input
+          v-model="form.passWord"
+          show-password
+          placeholder="请输入密码"
+        ></el-input>
+      </el-form-item>
+      <el-form-item class="checkbox">
+        <el-checkbox v-model="saveUserData">记住密码</el-checkbox>
+        <tips
+          trigger="hover"
+          placement="top"
+          content="把您的信息保存到本地，带来便捷的同时会有一定的风险！"
+        />
+      </el-form-item>
+      <el-button
+        type="primary"
+        style="width:100%"
+        size="medium"
+        :loading="loginLoading"
+        @click="handleLogin"
+        >登录</el-button
+      >
+    </el-form>
+  </div>
+</template>
+<script>
+import { Input, Button, Form, FormItem, Checkbox } from "element-ui";
+import Tips from "@/components/Tips";
+export default {
+  components: {
+    elInput: Input,
+    elButton: Button,
+    elForm: Form,
+    elFormItem: FormItem,
+    elCheckbox: Checkbox,
+    Tips
+  },
+  data() {
+    const validateUserName = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error("请输入您的用户名!"));
+      } else {
+        callback();
+      }
+    };
+    const validatePassWord = (rule, value, callback) => {
+      if (!value.length) {
+        callback(new Error("请输入您的密码"));
+      }
+      if (value.length < 6) {
+        callback(new Error("密码长度不能小于6位！"));
+      } else {
+        callback();
+      }
+    };
+    return {
+      form: {
+        userName: "admin",
+        passWord: "123456"
+      },
+      rules: {
+        userName: [
+          { required: true, trigger: "blur", validator: validateUserName }
+        ],
+        passWord: [
+          { required: true, trigger: "blur", validator: validatePassWord }
+        ]
+      },
+      saveUserData: false,
+      loginLoading: false
+    };
+  },
+  methods: {
+    handleLogin() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.loginLoading = true;
+        } else {
+          this.$message.warning("请按要求填写字段");
+        }
+      });
+    }
+  },
+  created() {
+    console.log(process.env);
+  }
+};
+</script>
+<style lang="less" scoped>
+@import "~@/styles/variables.less";
+@labelColor: #889aa4;
+/deep/ .el-checkbox__inner {
+  border-color: @labelColor;
+  background: none;
+}
+.login-contianer {
+  width: 100%;
+  height: 100%;
+  background: @menuHover;
+  /deep/.el-form {
+    width: 480px;
+    max-width: 100%;
+    padding: 100px 35px 0;
+    margin: 0 auto;
+
+    .login__logo {
+      text-align: center;
+      .logo {
+        width: 80px;
+        height: 80px;
+      }
+    }
+    .login__title {
+      text-align: center;
+      color: white;
+      font-size: 26px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    .checkbox {
+      > .el-form-item__content {
+        border: none;
+        background: none;
+        color: @labelColor;
+        .el-checkbox__label {
+          color: @labelColor;
+        }
+      }
+    }
+    .el-form-item__content {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      .icon {
+        color: @labelColor;
+        padding: 0 0 0 10px;
+        &.view {
+          cursor: pointer;
+        }
+      }
+    }
+    .el-input {
+      width: 90%;
+      > input {
+        height: 47px;
+      }
+    }
+    .el-input__inner {
+      border: none;
+      background: transparent;
+      color: #fff;
+    }
+  }
+}
+</style>

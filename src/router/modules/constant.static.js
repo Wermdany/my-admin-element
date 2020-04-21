@@ -19,6 +19,12 @@ const constent = [
     ]
   },
   {
+    path: "/login",
+    component: "login",
+    hidden: true,
+    meta: { title: "用户登录" }
+  },
+  {
     path: "/asd",
     component: "main",
     redirect: "/asd/dfg",
@@ -33,7 +39,7 @@ const constent = [
         children: [
           {
             path: "dfg",
-            name: "dfg",
+            name: "dfge",
             component: "index",
             meta: { title: "测试", icon: "eleme" }
           },

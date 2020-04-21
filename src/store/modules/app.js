@@ -1,32 +1,44 @@
 /**
- * 全局设置
+ * 系统设置
  */
 import Storage from "@/utils/storage";
+import {
+  UI_SIZE,
+  SIDEBAR_LOGO,
+  FIXED_HEADER,
+  OPEN_TAGS_VIEW,
+  IS_COLLAPSE
+} from "@/namespace";
 const state = {
   // 侧边栏
   sidebar: {
     // 是否缩进
-    isCollapse: Storage.get("IS_COLLAPSE") || false,
+    isCollapse: Storage.get(IS_COLLAPSE) || false,
     // 是否开启动画
     withoutAnimation: false
   },
+  // 当前视窗大小
   device: "desktop",
-  size: localStorage.getItem("UI_SIZE") || "small",
-  sidebarLogo: Storage.get("SIDEBAR_LOGO") || true,
-  fixedHeader: Storage.get("FIXED_HEADER") || true,
-  openTagsView: Storage.get("OPEN_TAGS_VIEW") || true
+  // 全局组件大小
+  size: localStorage.getItem(UI_SIZE) || "medium",
+  // 是否显示logo
+  sidebarLogo: Storage.get(SIDEBAR_LOGO) || true,
+  // 是否固定头部
+  fixedHeader: Storage.get(FIXED_HEADER) || true,
+  // 是否打开标签页
+  openTagsView: Storage.get(OPEN_TAGS_VIEW) || true
 };
 const mutations = {
   TOGGLE_SIDEBAR: state => {
-    Storage.set("IS_COLLAPSE", !state.sidebar.isCollapse);
+    Storage.set(IS_COLLAPSE, !state.sidebar.isCollapse);
     state.sidebar.isCollapse = !state.sidebar.isCollapse;
   },
   TOGGLE_FIXED_HEADER: state => {
-    Storage.set("FIXED_HEADER", !state.fixedHeader);
+    Storage.set(FIXED_HEADER, !state.fixedHeader);
     state.fixedHeader = !state.fixedHeader;
   },
   SET_SIZE: (state, size) => {
-    Storage.set("UI_SIZE", size);
+    Storage.set(UI_SIZE, size);
     state.size = size;
   }
 };

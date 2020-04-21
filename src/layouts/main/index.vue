@@ -1,19 +1,27 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <sidebar class="sidebar-container"></sidebar>
-    <el-scrollbar wrap-class="scorllbar" :noresize="false" style="height: 100%;">
+    <el-scrollbar
+      wrap-class="scorllbar"
+      :noresize="false"
+      style="height: 100%;"
+    >
       <div class="main-container" :class="{ 'has-tags-view': needTagsView }">
-        <header class="header-container" :class="{ 'fixed-header': fixedHeader }">
+        <header
+          class="header-container"
+          :class="{ 'fixed-header': fixedHeader }"
+        >
           <navbar />
           <tags-view />
         </header>
-        <app-main></app-main>
+        <app-main />
+        <my-footer />
       </div>
     </el-scrollbar>
   </div>
 </template>
 <script>
-import { AppMain, TagsView, Sidebar, Navbar } from "../components/main";
+import { AppMain, TagsView, Sidebar, Navbar, Footer } from "../components/main";
 import { mapState } from "vuex";
 import { Scrollbar } from "element-ui";
 export default {
@@ -23,7 +31,8 @@ export default {
     AppMain,
     TagsView,
     Sidebar,
-    Navbar
+    Navbar,
+    myFooter: Footer
   },
   computed: {
     ...mapState({

@@ -19,7 +19,8 @@
         :key="item.id"
         :disabled="size === item.value"
         :command="item.value"
-      >{{ item.label }}</el-dropdown-item>
+        >{{ item.label }}</el-dropdown-item
+      >
     </el-dropdown-menu>
   </el-dropdown>
 </template>

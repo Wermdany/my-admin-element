@@ -9,7 +9,8 @@
               index == levelList.length - 1
           "
           class="no-redirect"
-        >{{ item.meta.title }}</span>
+          >{{ item.meta.title }}</span
+        >
         <app-link v-else :to="handleLink(item)">{{ item.meta.title }}</app-link>
       </el-breadcrumb-item>
     </transition-group>
@@ -20,13 +21,11 @@
 import { Breadcrumb, BreadcrumbItem } from "element-ui";
 import pathToRegexp from "path-to-regexp";
 import AppLink from "@/layouts/components/Sidebar/Link";
-import Item from "@/layouts/components/Sidebar/Item";
 export default {
   components: {
     elBreadcrumb: Breadcrumb,
     elBreadcrumbItem: BreadcrumbItem,
-    AppLink,
-    Item
+    AppLink
   },
   data() {
     return {
@@ -72,7 +71,7 @@ export default {
       if (!name) {
         return false;
       }
-      return name.trim().toLocaleLowerCase() === "index".toLocaleLowerCase();
+      return name.trim().toLocaleLowerCase() === "Index".toLocaleLowerCase();
     },
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561

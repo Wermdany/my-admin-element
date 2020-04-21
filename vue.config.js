@@ -1,4 +1,7 @@
 module.exports = {
   publicPath: "/",
-  productionSourceMap: false
+  productionSourceMap: false,
+  devServer: {
+    before: require("./service/index.js")
+  }
 };

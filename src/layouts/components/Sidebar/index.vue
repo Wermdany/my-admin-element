@@ -20,7 +20,7 @@
 import { Menu, Scrollbar, Tooltip } from "element-ui";
 import SidebarItem from "./SidebarItem";
 import setting from "@/styles/variables.less";
-import route from "@/router/modules/constant";
+import route from "@/router/modules/constant.static";
 export default {
   name: "Sidebar",
   components: {

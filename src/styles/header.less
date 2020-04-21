@@ -1,32 +1,39 @@
-.fixed-header{
+.fixed-header {
   position: fixed;
   width: calc(100% - (@sideBarWidth));
   top: 0;
   right: 0;
   z-index: 1;
 }
-.hidden-sidebar .fixed-header{
+
+.hidden-sidebar .fixed-header {
   width: calc(100% - 64px);
 }
-.fixed-header + .app-main{
-    margin-top: 50px;
+
+.fixed-header+.app-main {
+  margin-top: 50px;
 }
+
 // header
 
-.navbar{
+.navbar {
   background: #fff;
   overflow: hidden;
   position: relative;
   height: 50px;
   line-height: 50px;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-    .hamburger,.app-breadcrumb{
-      float: left;
-    }
-    .el-dropdown{
-      height: 100%;
-    }
-    .nav-menu--right {
+
+  .hamburger,
+  .app-breadcrumb {
+    float: left;
+  }
+
+  .el-dropdown {
+    height: 100%;
+  }
+
+  .nav-menu--right {
     float: right;
     height: 100%;
     margin-right: 18px;
@@ -43,54 +50,64 @@
   position: relative;
   vertical-align: text-bottom;
   cursor: pointer;
+
   &:hover {
     background: rgba(0, 0, 0, 0.025);
   }
+
   // 下拉提示
-  i.tips{
+  i.tips {
     position: absolute;
     font-size: 12px;
     right: 3px;
     bottom: 5px;
   }
-  &.user{
-   user-select: none;
-   font-size: 14px;
-   width: auto;
-    &.un-login{ 
+
+  &.user {
+    user-select: none;
+    font-size: 14px;
+    width: auto;
+
+    &.un-login {
       color: #bbb;
     }
-    &.login{
-     
-      &>img{ 
-      margin-top: 5px;
-      width: 40px;
-      height: 40px;
-      border-radius: 5px;
-      display: inline-block;
-    }
+
+    &.login {
+
+      &>img {
+        margin-top: 5px;
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        display: inline-block;
+      }
     }
   }
 }
+
 // setting-dialog
-.setting--dialog{
-  .el-dialog__header{
-    padding:10px;
+.setting--dialog {
+  .el-dialog__header {
+    padding: 10px;
     border-bottom: 1px solid #ededed;
     text-align: center;
-    &>span{
+
+    &>span {
       font-size: 16px;
     }
   }
-  .el-dialog__body{
+
+  .el-dialog__body {
     padding: 15px;
   }
-  .setting-item{
+
+  .setting-item {
     overflow: hidden;
-    color: rgba(0,0,0,0.65);
+    color: rgba(0, 0, 0, 0.65);
     vertical-align: middle;
-    padding:  10px 0;
-    &>.switch{
+    padding: 10px 0;
+
+    &>.switch {
       float: right;
     }
   }

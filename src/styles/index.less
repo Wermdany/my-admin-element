@@ -1,24 +1,29 @@
 @import "./resetcss.less";
-@import "./transition.less";
 @import "./variables.less";
+@import "./transition.less";
 @import "./sidebar.less";
 @import "./appContainer.less";
 @import "./header.less";
-#app{
+@import "./footer.less";
+
+#app {
   // 全局配置
-    height: 100%;
-    overflow: hidden;
-    min-height: auto;
+  height: 100%;
+  overflow: hidden;
+  min-height: auto;
+
   .el-scrollbar__wrap.scorllbar {
     max-height: 100%;
     overflow-x: hidden;
+
     // 主滚动增加宽度，让用户更加便捷点击
-    & + .el-scrollbar__bar.is-horizontal + .el-scrollbar__bar.is-vertical {
+    &+.el-scrollbar__bar.is-horizontal+.el-scrollbar__bar.is-vertical {
       width: 8px;
       right: 5px;
     }
-  } 
-   // 主布局配置
+  }
+
+  // 主布局配置
   .app-wrapper {
     position: relative;
     width: 100%;
