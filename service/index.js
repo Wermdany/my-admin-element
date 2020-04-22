@@ -9,6 +9,6 @@ app.use(async (ctx, next) => {
 app.use(router.routes());
 
 app.listen(7000);
-console.log("server is start at port 7000.");
+console.log("server is start at http://localhost:7000");
 
 module.exports = () => app;

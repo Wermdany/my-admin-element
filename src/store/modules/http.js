@@ -44,6 +44,7 @@ const mutations = {
   },
   RESET_CANCEL(state) {
     state.cancel = {};
+    state.allResponse = false;
   },
   RESPONSE(state, funName) {
     if (Object.keys(state.cancel).includes(funName)) {

@@ -16,7 +16,6 @@ const module = modulesFiles.keys().reduce((modules, item) => {
   modules[name] = value.default;
   return modules;
 }, {});
-console.log(module);
 
 const createRouter = () =>
   new Router({

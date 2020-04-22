@@ -4,7 +4,7 @@
 import axios from "axios";
 import { Message, MessageBox } from "element-ui";
 import store from "@/store";
-import { HTTP_HEADER_TOKEN_NAME } from "@/namespace";
+import { HTTP_HEADER_TOKEN_NAME, REPEAT_REQUEST_CODE } from "@/namespace";
 const service = axios.create({
   baseURL: process.env.VUE_APP_HTTP_BASE_URL,
   timeout: 5000
@@ -17,6 +17,10 @@ const requestInter = service.interceptors.request.use(
   config => {
     if (store.getters.token) {
       config.headers[HTTP_HEADER_TOKEN_NAME] = store.getters.token;
+    }
+    const http = store.getters.http;
+    if (http.hasOwnProperty(config.funName)) {
+      return Promise.reject({ code: REPEAT_REQUEST_CODE, msg: "不要重复提交" });
     }
     /**
      *

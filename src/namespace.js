@@ -26,3 +26,8 @@ export const OPEN_TAGS_VIEW = "OPEN_TAGS_VIEW";
  * 请求头 token 的名字
  */
 export const HTTP_HEADER_TOKEN_NAME = "auth-token";
+/**
+ * 重复请求 Code ,应该避免和后台的请求错误码重复
+ */
+
+export const REPEAT_REQUEST_CODE = 8888;

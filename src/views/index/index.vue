@@ -8,6 +8,7 @@
 <script>
 import { test, testOne } from "@/api/test";
 import { Button } from "element-ui";
+import { alwayResolve } from "@/utils";
 export default {
   name: "index",
   components: {
@@ -18,24 +19,20 @@ export default {
   },
   methods: {
     get() {
-      test()
-        .then(res1 => {
-          console.log(res1);
+      alwayResolve({ test1: test, test2: testOne })
+        .then(res => {
+          console.log(res);
         })
         .catch(res => {
           console.log(res);
         });
-      testOne()
-        .then(res2 => {
-          console.log(res2);
-        })
-        .catch(res2 => {
-          console.log(res2);
-        });
     },
     cancel() {
-      this.$store.dispatch("http/cancel", { funNames: ["testOne"] });
+      this.$store.dispatch("http/cancel", { funNames: ["testOne", "test"] });
     }
+  },
+  created() {
+    this.get();
   }
 };
 </script>
