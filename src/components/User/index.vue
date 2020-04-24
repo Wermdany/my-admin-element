@@ -3,7 +3,7 @@
     <div class="header-icon-item user un-login" v-if="isLogin">未登录</div>
     <div class="header-icon-item user login" v-else>
       <img :src="avatar" />
-      <i class="el-icon-caret-bottom tips"></i>
+      <!-- <i class="el-icon-caret-bottom tips"></i> -->
     </div>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item v-if="isLogin">登录</el-dropdown-item>

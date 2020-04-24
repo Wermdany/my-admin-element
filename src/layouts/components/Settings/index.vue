@@ -1,42 +1,40 @@
 <template>
-  <el-tooltip
+  <div
+    class="header-icon-item"
+    title="修改全局设置"
     style="vertical-align:top;"
-    effect="dark"
-    content="修改全局设置"
-    placement="bottom"
-    :enterable="false"
-    :open-delay="openDelay"
+    @click.stop="handleVisible"
   >
-    <div class="header-icon-item" @click.stop="handleVisible">
-      <i class="el-icon-s-operation"></i>
-      <el-dialog
-        :visible.sync="visible"
-        lock-scroll
-        append-to-body
-        custom-class="setting--dialog"
-        width="300px"
-        :show-close="false"
-        title="系统设置"
-      >
-        <div class="setting-item">
-          <span>固定头部：</span>
-          <el-switch v-model="fixedHeader" class="switch"></el-switch>
-        </div>
-      </el-dialog>
-    </div>
-  </el-tooltip>
+    <i class="el-icon-s-operation"></i>
+    <el-drawer
+      :visible.sync="visible"
+      lock-scroll
+      append-to-body
+      custom-class="setting--drawer"
+      size="250px"
+      :show-close="false"
+      title="系统设置"
+    >
+      <div class="setting-item">
+        <span>固定头部：</span>
+        <el-switch v-model="fixedHeader" class="switch"></el-switch>
+      </div>
+      <div class="setting-item">
+        <span>显示Logo：</span>
+        <el-switch v-model="sidebarLogo" class="switch"></el-switch>
+      </div>
+    </el-drawer>
+  </div>
 </template>
 <script>
-import { Tooltip, Dialog, Switch } from "element-ui";
+import { Switch, Drawer } from "element-ui";
 export default {
   name: "Setting",
   components: {
-    elTooltip: Tooltip,
-    elDialog: Dialog,
-    elSwitch: Switch
+    elSwitch: Switch,
+    elDrawer: Drawer
   },
   data() {
-    this.openDelay = 800;
     return {
       visible: false
     };
@@ -51,6 +49,14 @@ export default {
       },
       set() {
         this.$store.dispatch("app/toggleFixedHeader");
+      }
+    },
+    sidebarLogo: {
+      get() {
+        return this.$store.state.app.sidebarLogo;
+      },
+      set() {
+        this.$store.dispatch("app/toggleSidebarLogo");
       }
     }
   },

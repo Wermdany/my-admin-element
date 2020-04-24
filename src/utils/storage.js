@@ -1,7 +1,14 @@
 class Storage {
   constructor() { }
   static get(key) {
-    return JSON.parse(localStorage.getItem(key));
+    const res = JSON.parse(JSON.stringify(localStorage.getItem(key)));
+    if (res === "true") {
+      return true;
+    }
+    if (res === "false") {
+      return false;
+    }
+    return res;
   }
   static set(key, value) {
     localStorage.setItem(key, value);

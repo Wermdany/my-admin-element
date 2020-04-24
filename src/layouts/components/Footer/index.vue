@@ -21,7 +21,7 @@
         </a>
       </div>
       <div class="layout-footer__copyright">
-        <span>Copyright &copy; 2020 野生技术协会</span>
+        <span>Copyright &copy; {{ new Date().getFullYear() }} XXXXXXX</span>
       </div>
     </div>
   </footer>

@@ -19,7 +19,10 @@ export default {
   },
   methods: {
     get() {
-      alwayResolve({ test1: test, test2: testOne })
+      alwayResolve({
+        test1: test,
+        test2: testOne
+      })
         .then(res => {
           console.log(res);
         })
@@ -30,9 +33,6 @@ export default {
     cancel() {
       this.$store.dispatch("http/cancel", { funNames: ["testOne", "test"] });
     }
-  },
-  created() {
-    this.get();
   }
 };
 </script>

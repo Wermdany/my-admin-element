@@ -7,11 +7,11 @@
 }
 
 .hidden-sidebar .fixed-header {
-  width: calc(100% - 64px);
+  width: calc(100% - @sideBarHiddenWidth);
 }
 
 .fixed-header+.app-main {
-  margin-top: 50px;
+  margin-top: @headerHeight;
 }
 
 // header
@@ -20,8 +20,8 @@
   background: #fff;
   overflow: hidden;
   position: relative;
-  height: 50px;
-  line-height: 50px;
+  height: @headerHeight;
+  line-height: @headerHeight;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger,
@@ -43,10 +43,10 @@
 // right item 
 .header-icon-item {
   display: inline-block;
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  padding: 0 15px;
+  width: @headerHeight;
+  height: @headerHeight;
+  font-size: @headerFontSize;
+  padding: 0 (@headerHeight - @headerFontSize) / 2;
   position: relative;
   vertical-align: text-bottom;
   cursor: pointer;
@@ -56,12 +56,12 @@
   }
 
   // 下拉提示
-  i.tips {
-    position: absolute;
-    font-size: 12px;
-    right: 3px;
-    bottom: 5px;
-  }
+  // i.tips {
+  //   position: absolute;
+  //   font-size: 12px;
+  //   right: 3px;
+  //   bottom: 5px;
+  // }
 
   &.user {
     user-select: none;
@@ -75,9 +75,9 @@
     &.login {
 
       &>img {
-        margin-top: 5px;
-        width: 40px;
-        height: 40px;
+        margin-top: (@headerHeight - @headerFontSize*2)/2;
+        width: @headerFontSize*2;
+        height: @headerFontSize*2;
         border-radius: 5px;
         display: inline-block;
       }
@@ -85,19 +85,72 @@
   }
 }
 
-// setting-dialog
-.setting--dialog {
-  .el-dialog__header {
+//redirect
+
+.header-icon-item {
+  .el-icon-refresh.rotate {
+    animation: rotate 1s ease-in-out infinite;
+  }
+}
+
+//breadcrumb
+.app-breadcrumb.el-breadcrumb {
+  display: inline-block;
+  font-size: @headerFontSize*0.8;
+  line-height: @headerHeight;
+  margin-left: 8px;
+
+  .no-redirect {
+    color: #97a8be;
+    cursor: text;
+  }
+}
+
+//hamburger
+.hamburger {
+  width: @headerHeight;
+  height: @headerHeight;
+  font-size: @headerFontSize;
+  padding: 0 (@headerHeight - @headerFontSize)/2;
+  line-height: @headerHeight;
+  cursor: pointer;
+  transition: background 0.28s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.025);
+  }
+
+  i {
+    transition: transform 0.28s;
+
+    &.collapse {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// setting-dialog 
+
+.el-drawer__container.el-drawer__open {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.setting--drawer {
+
+
+  .el-drawer__header {
     padding: 10px;
     border-bottom: 1px solid #ededed;
     text-align: center;
+    height: @headerHeight;
+    margin-bottom: 0;
 
     &>span {
       font-size: 16px;
     }
   }
 
-  .el-dialog__body {
+  .el-drawer__body {
     padding: 15px;
   }
 

@@ -1,9 +1,21 @@
 const constent = [
   {
-    path: "/redirect/:path(.*)",
+    path: "/redirect",
+    component: "main",
+    hidden: true,
+    name: "redirect",
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: "redirect"
+      }
+    ]
+  },
+  {
+    path: "/redirect-all/:path(.*)",
     component: "redirect",
     hidden: true,
-    name: "redirect"
+    name: "redirectAll"
   },
   {
     path: "/",
@@ -46,6 +58,60 @@ const constent = [
           {
             path: "dfga",
             name: "dfga",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga1",
+            name: "dfga1",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga2",
+            name: "dfga3",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga4",
+            name: "dfga4",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga5",
+            name: "dfga5",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga6",
+            name: "dfga6",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga7",
+            name: "dfga7",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga8",
+            name: "dfga8",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga9",
+            name: "dfga9",
+            component: "index",
+            meta: { title: "测试", icon: "eleme" }
+          },
+          {
+            path: "dfga0",
+            name: "dfga0",
             component: "index",
             meta: { title: "测试", icon: "eleme" }
           }

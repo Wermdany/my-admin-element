@@ -43,6 +43,7 @@
 <script>
 import { Input, Button, Form, FormItem, Checkbox } from "element-ui";
 import Tips from "@/components/Tips";
+import { userLogin } from "@/api/user";
 export default {
   components: {
     elInput: Input,
@@ -89,17 +90,24 @@ export default {
   },
   methods: {
     handleLogin() {
-      this.$refs.form.validate(valid => {
+      this.$refs.form.validate(async valid => {
         if (valid) {
           this.loginLoading = true;
+          const res = await userLogin({
+            data: { userName: this.form.userName, passWord: this.form.passWord }
+          });
+          if (res.success) {
+            this.$message.success("登陆成功！");
+            this.loginLoading = false;
+            this.$router.push({ path: "/index" });
+          } else {
+            this.$message.warning("登陆失败！");
+          }
         } else {
           this.$message.warning("请按要求填写字段");
         }
       });
     }
-  },
-  created() {
-    console.log(process.env);
   }
 };
 </script>

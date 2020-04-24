@@ -20,23 +20,3 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped>
-.hamburger {
-  width: 50px;
-  height: 50px;
-  font-size: 20px;
-  padding: 0 15px;
-  line-height: 50px;
-  cursor: pointer;
-  transition: background 0.28s;
-  &:hover {
-    background: rgba(0, 0, 0, 0.025);
-  }
-  i {
-    transition: transform 0.28s;
-    &.collapse {
-      transform: rotate(180deg);
-    }
-  }
-}
-</style>

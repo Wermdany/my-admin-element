@@ -5,6 +5,7 @@
     <div class="nav-menu--right">
       <size-selete />
       <setting />
+      <redirct />
       <user />
     </div>
   </nav>
@@ -13,6 +14,7 @@
 import Hamburger from "@/components/Hamburger";
 import Breadcrumb from "@/components/Breadcrumb";
 import SizeSelete from "@/components/SizeSelect";
+import Redirct from "@/components/Redirect";
 import User from "@/components/User";
 import Setting from "@/layouts/components/Settings";
 import { mapState } from "vuex";
@@ -23,7 +25,8 @@ export default {
     Breadcrumb,
     SizeSelete,
     Setting,
-    User
+    User,
+    Redirct
   },
   computed: {
     ...mapState({

@@ -2,10 +2,12 @@
  * 用户信息
  */
 const state = {
-  token: "",
-  name: "",
-  avatar: "",
-  introduction: ""
+  userData: {
+    token: "",
+    name: "",
+    avatar: "",
+    introduction: ""
+  }
 };
 const mutations = {};
 const actions = {};

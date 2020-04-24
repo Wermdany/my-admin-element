@@ -9,24 +9,25 @@ import {
   OPEN_TAGS_VIEW,
   IS_COLLAPSE
 } from "@/namespace";
+import { getStorageNullToDefault } from "@/store/defaultVar";
 const state = {
   // 侧边栏
   sidebar: {
     // 是否缩进
-    isCollapse: Storage.get(IS_COLLAPSE) || false,
+    isCollapse: getStorageNullToDefault(IS_COLLAPSE),
     // 是否开启动画
     withoutAnimation: false
   },
   // 当前视窗大小
   device: "desktop",
   // 全局组件大小
-  size: localStorage.getItem(UI_SIZE) || "medium",
+  size: getStorageNullToDefault(UI_SIZE),
   // 是否显示logo
-  sidebarLogo: Storage.get(SIDEBAR_LOGO) || true,
+  sidebarLogo: getStorageNullToDefault(SIDEBAR_LOGO),
   // 是否固定头部
-  fixedHeader: Storage.get(FIXED_HEADER) || true,
+  fixedHeader: getStorageNullToDefault(FIXED_HEADER),
   // 是否打开标签页
-  openTagsView: Storage.get(OPEN_TAGS_VIEW) || true
+  openTagsView: getStorageNullToDefault(OPEN_TAGS_VIEW)
 };
 const mutations = {
   TOGGLE_SIDEBAR: state => {
@@ -36,6 +37,10 @@ const mutations = {
   TOGGLE_FIXED_HEADER: state => {
     Storage.set(FIXED_HEADER, !state.fixedHeader);
     state.fixedHeader = !state.fixedHeader;
+  },
+  TOGGLE_SIDEBAR_LOGO: state => {
+    Storage.set(SIDEBAR_LOGO, !state.sidebarLogo);
+    state.sidebarLogo = !state.sidebarLogo;
   },
   SET_SIZE: (state, size) => {
     Storage.set(UI_SIZE, size);
@@ -48,6 +53,9 @@ const actions = {
   },
   toggleFixedHeader({ commit }) {
     commit("TOGGLE_FIXED_HEADER");
+  },
+  toggleSidebarLogo({ commit }) {
+    commit("TOGGLE_SIDEBAR_LOGO");
   },
   setSize({ commit }, size) {
     commit("SET_SIZE", size);

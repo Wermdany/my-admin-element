@@ -74,3 +74,7 @@ export function isArray(arg) {
   }
   return Array.isArray(arg);
 }
+export function validJSON(str) {
+  const reg = /[\\[\\]\\{\\}]/;
+  return reg.test(str);
+}

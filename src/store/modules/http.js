@@ -3,6 +3,7 @@
  * http请求拦截取消
  *
  */
+import { Message } from "element-ui";
 const state = {
   cancel: {}, // cancel方法组
   allResponse: false
@@ -11,7 +12,8 @@ const state = {
 const mutations = {
   CANCEL(state, { funNames = [], msg = "用户手动取消网络请求" }) {
     if (!Object.keys(state.cancel).length) {
-      throw new Error("当前不在任何一个请求周期内，无法取消任何请求");
+      Message.warning("当前不在任何一个请求周期内，无法取消任何请求");
+      // throw new Error("当前不在任何一个请求周期内，无法取消任何请求");
     }
     for (const key in state.cancel) {
       if (state.cancel.hasOwnProperty(key)) {

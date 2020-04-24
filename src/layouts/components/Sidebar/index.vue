@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Logo :collapse="isCollapse" v-if="sidebarLogo" />
     <el-scrollbar>
       <el-menu
         :default-active="activeMenu"
@@ -11,7 +12,12 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="item in route" :key="item.path" :item="item" :base-path="item.path" />
+        <sidebar-item
+          v-for="item in route"
+          :key="item.path"
+          :item="item"
+          :base-path="item.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -19,6 +25,7 @@
 <script>
 import { Menu, Scrollbar, Tooltip } from "element-ui";
 import SidebarItem from "./SidebarItem";
+import Logo from "./Logo";
 import setting from "@/styles/variables.less";
 import route from "@/router/modules/constant.static";
 export default {
@@ -28,7 +35,8 @@ export default {
     elScrollbar: Scrollbar,
     SidebarItem,
     // eslint-disable-next-line vue/no-unused-components
-    elTooltip: Tooltip
+    elTooltip: Tooltip,
+    Logo
   },
   computed: {
     activeMenu() {
@@ -39,6 +47,9 @@ export default {
     },
     setting() {
       return setting;
+    },
+    sidebarLogo() {
+      return this.$store.state.app.sidebarLogo;
     },
     route() {
       return route;

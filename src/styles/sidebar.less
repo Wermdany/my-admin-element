@@ -50,6 +50,51 @@
 
   .hidden-sidebar {
     .sidebar-container {
-      width: 64px !important;
+      width: @sideBarHiddenWidth  !important;
+    }
+  }
+
+  //logo 组件
+  .logo-container {
+    height: @headerHeight;
+    width: @sideBarWidth ;
+    background: @subMenuBg;
+    transition: width .28s;
+    line-height: @headerHeight;
+    overflow: hidden;
+
+    >a {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+
+      >img {
+        display: inline-block;
+        width: @headerFontSize * 1.8;
+        height: @headerFontSize * 1.8;
+        line-height: @headerHeight;
+        vertical-align: middle;
+      }
+
+      >h1 {
+        display: inline-block;
+        color: white;
+        font-weight: bold;
+        vertical-align: middle;
+        font-size: @headerFontSize / 1.4;
+      }
+    }
+  }
+
+  .hidden-sidebar {
+    .logo-container {
+      width: @sideBarHiddenWidth  !important;
+    }
+  }
+
+  // 显示 logo 的时候修改下部的高度
+  .sidebar-container.has-logo {
+    >.el-scrollbar {
+      height: calc(100% - @headerHeight) !important;
     }
   }

@@ -1,6 +1,9 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <sidebar class="sidebar-container"></sidebar>
+    <sidebar
+      class="sidebar-container"
+      :class="{ 'has-logo': sidebarLogo }"
+    ></sidebar>
     <el-scrollbar
       wrap-class="scorllbar"
       :noresize="false"
@@ -39,7 +42,8 @@ export default {
       sidebar: state => state.app.sidebar,
       device: state => state.app.device,
       needTagsView: state => state.app.openTagsView,
-      fixedHeader: state => state.app.fixedHeader
+      fixedHeader: state => state.app.fixedHeader,
+      sidebarLogo: state => state.app.sidebarLogo
     }),
     classObj() {
       return {

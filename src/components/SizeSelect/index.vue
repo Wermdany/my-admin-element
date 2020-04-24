@@ -1,18 +1,9 @@
 <template>
   <el-dropdown @command="handleSetSize" trigger="click">
-    <el-tooltip
-      class="item"
-      effect="dark"
-      content="修改全局的尺寸大小"
-      placement="bottom"
-      :enterable="false"
-      :open-delay="openDelay"
-    >
-      <div class="header-icon-item">
-        <i class="el-icon-menu"></i>
-        <i class="el-icon-caret-bottom tips" />
-      </div>
-    </el-tooltip>
+    <div class="header-icon-item" title="修改全局的尺寸大小">
+      <i class="el-icon-menu"></i>
+      <!-- <i class="el-icon-caret-bottom tips" /> -->
+    </div>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item
         v-for="item of sizeOptions"
@@ -25,23 +16,15 @@
   </el-dropdown>
 </template>
 <script>
-import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  Tooltip,
-  Loading
-} from "element-ui";
+import { Dropdown, DropdownItem, DropdownMenu, Loading } from "element-ui";
 export default {
   name: "SizeSelete",
   components: {
     elDropdown: Dropdown,
     elDropdownItem: DropdownItem,
-    elDropdownMenu: DropdownMenu,
-    elTooltip: Tooltip
+    elDropdownMenu: DropdownMenu
   },
   data() {
-    this.openDelay = 800;
     return {
       sizeOptions: [
         { label: "大型", value: "medium" },
@@ -59,7 +42,7 @@ export default {
     handleSetSize(size) {
       this.$ELEMENT.size = size;
       this.$store.dispatch("app/setSize", size);
-      this.$router.replace({ path: "/redirect" + this.$route.fullPath });
+      this.$router.replace({ path: "/redirect-all" + this.$route.fullPath });
       const load = Loading.service({
         lock: true,
         text: "正在替换全局尺寸大小..."
