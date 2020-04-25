@@ -11,18 +11,14 @@
 <script>
 export default {
   name: "Redirect",
-  data() {
-    return {
-      rotate: false
-    };
-  },
   methods: {
     refreshPage() {
-      this.rotate = true;
       this.$router.replace({ path: "/redirect" + this.$route.fullPath });
-      setTimeout(() => {
-        this.rotate = false;
-      }, 1000);
+    }
+  },
+  computed: {
+    rotate() {
+      return this.$store.state.app.pageLoading;
     }
   }
 };

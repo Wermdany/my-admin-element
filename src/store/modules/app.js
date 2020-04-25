@@ -27,7 +27,9 @@ const state = {
   // 是否固定头部
   fixedHeader: getStorageNullToDefault(FIXED_HEADER),
   // 是否打开标签页
-  openTagsView: getStorageNullToDefault(OPEN_TAGS_VIEW)
+  openTagsView: getStorageNullToDefault(OPEN_TAGS_VIEW),
+  //页面是否正在加载中
+  pageLoading: true
 };
 const mutations = {
   TOGGLE_SIDEBAR: state => {
@@ -42,9 +44,16 @@ const mutations = {
     Storage.set(SIDEBAR_LOGO, !state.sidebarLogo);
     state.sidebarLogo = !state.sidebarLogo;
   },
+  TOGGLE_OPEN_TAGS_VIEW: state => {
+    Storage.set(OPEN_TAGS_VIEW, !state.openTagsView);
+    state.openTagsView = !state.openTagsView;
+  },
   SET_SIZE: (state, size) => {
     Storage.set(UI_SIZE, size);
     state.size = size;
+  },
+  TOGGLE_PAGE_LOADING: (state, data) => {
+    state.pageLoading = data;
   }
 };
 const actions = {
@@ -56,6 +65,12 @@ const actions = {
   },
   toggleSidebarLogo({ commit }) {
     commit("TOGGLE_SIDEBAR_LOGO");
+  },
+  toggleOpenTagsView({ commit }) {
+    commit("TOGGLE_OPEN_TAGS_VIEW");
+  },
+  togglePageLoading({ commit }, data) {
+    commit("TOGGLE_PAGE_LOADING", data);
   },
   setSize({ commit }, size) {
     commit("SET_SIZE", size);

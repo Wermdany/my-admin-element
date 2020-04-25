@@ -6,7 +6,8 @@ import {
   SIDEBAR_LOGO,
   FIXED_HEADER,
   OPEN_TAGS_VIEW,
-  IS_COLLAPSE
+  IS_COLLAPSE,
+  USER_INFO
 } from "@/namespace";
 import Storage from "@/utils/storage";
 
@@ -15,7 +16,8 @@ const defaultVar = {
   [SIDEBAR_LOGO]: true,
   [FIXED_HEADER]: true,
   [OPEN_TAGS_VIEW]: true,
-  [IS_COLLAPSE]: false
+  [IS_COLLAPSE]: false,
+  [USER_INFO]: { token: "", name: "", avatar: "", introduction: "" }
 };
 export default defaultVar;
 
@@ -28,6 +30,6 @@ export function getStorageNullToDefault(namespace) {
       return res;
     }
   } else {
-    throw new Error(`是否缺少需要缓存变量${namespace}的默认值`);
+    throw new Error(`是否缺少设置已经使用缓存变量 ${namespace} 的默认值`);
   }
 }

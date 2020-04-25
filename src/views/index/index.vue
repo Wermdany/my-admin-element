@@ -17,21 +17,31 @@ export default {
   data() {
     return {};
   },
+  created() {
+    this.get();
+  },
   methods: {
     get() {
-      alwayResolve({
-        test1: test,
-        test2: testOne
-      })
+      // alwayResolve({
+      //   test: test,
+      //   testOne: testOne
+      // })
+      //   .then(res => {
+      //     console.log(res);
+      //   })
+      //   .catch(res => {
+      //     console.log(res);
+      //   });
+      testOne()
         .then(res => {
           console.log(res);
         })
-        .catch(res => {
-          console.log(res);
+        .catch(err => {
+          console.log(err);
         });
     },
     cancel() {
-      this.$store.dispatch("http/cancel", { funNames: ["testOne", "test"] });
+      this.$store.dispatch("http/cancel", { funNames: ["testOne"] });
     }
   }
 };

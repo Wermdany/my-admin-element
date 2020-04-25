@@ -2,7 +2,8 @@ module.exports = {
   publicPath: "/",
   productionSourceMap: false,
   devServer: {
-    before: require("./service/index.js")
+    before:
+      process.env.ENV === "development" ? require("./service/index.js") : null
   },
   configureWebpack: {
     devtool: "cheap-source-map"

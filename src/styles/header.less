@@ -1,9 +1,18 @@
+.header-container {
+  background: #fff;
+}
+
+.header-container.fixed-header {
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+
 .fixed-header {
   position: fixed;
   width: calc(100% - (@sideBarWidth));
   top: 0;
   right: 0;
   z-index: 1;
+
 }
 
 .hidden-sidebar .fixed-header {
@@ -14,15 +23,18 @@
   margin-top: @headerHeight;
 }
 
+// 存在tags-view 并且固定头部
+.has-tags-view .fixed-header+.app-main {
+  margin-top: (@headerHeight + @tagsViewHeight);
+}
+
 // header
 
 .navbar {
-  background: #fff;
   overflow: hidden;
   position: relative;
   height: @headerHeight;
   line-height: @headerHeight;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger,
   .app-breadcrumb {
@@ -129,7 +141,7 @@
   }
 }
 
-// setting-dialog 
+// setting-drawer 
 
 .el-drawer__container.el-drawer__open {
   background: rgba(0, 0, 0, 0.3);

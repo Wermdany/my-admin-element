@@ -23,6 +23,10 @@
         <span>显示Logo：</span>
         <el-switch v-model="sidebarLogo" class="switch"></el-switch>
       </div>
+      <div class="setting-item">
+        <span>显示标签页：</span>
+        <el-switch v-model="openTagsView" class="switch"></el-switch>
+      </div>
     </el-drawer>
   </div>
 </template>
@@ -57,6 +61,14 @@ export default {
       },
       set() {
         this.$store.dispatch("app/toggleSidebarLogo");
+      }
+    },
+    openTagsView: {
+      get() {
+        return this.$store.state.app.openTagsView;
+      },
+      set() {
+        this.$store.dispatch("app/toggleOpenTagsView");
       }
     }
   },

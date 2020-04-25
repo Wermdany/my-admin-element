@@ -8,3 +8,6 @@ import http from "@/utils/request";
 export function userLogin({ data = {} }) {
   return http({ funName: "userLogin", method: "post", url: "login", data });
 }
+export function userLogout() {
+  return http({ funName: "userLogout", method: "post", url: "logout" });
+}

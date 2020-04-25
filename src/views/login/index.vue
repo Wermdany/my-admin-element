@@ -84,7 +84,7 @@ export default {
           { required: true, trigger: "blur", validator: validatePassWord }
         ]
       },
-      saveUserData: false,
+      saveUserData: true,
       loginLoading: false
     };
   },
@@ -93,16 +93,23 @@ export default {
       this.$refs.form.validate(async valid => {
         if (valid) {
           this.loginLoading = true;
-          const res = await userLogin({
-            data: { userName: this.form.userName, passWord: this.form.passWord }
-          });
-          if (res.success) {
-            this.$message.success("登陆成功！");
-            this.loginLoading = false;
-            this.$router.push({ path: "/index" });
-          } else {
-            this.$message.warning("登陆失败！");
-          }
+          this.$store
+            .dispatch("user/login", {
+              data: {
+                userName: this.form.userName,
+                passWord: this.form.passWord
+              },
+              type: this.saveUserData
+            })
+            .then(() => {
+              this.$message.success("登陆成功！");
+              this.loginLoading = false;
+              this.$router.push({ path: "/index" });
+            })
+            .catch(err => {
+              this.loginLoading = false;
+              this.$message.warning(err.errMsg);
+            });
         } else {
           this.$message.warning("请按要求填写字段");
         }

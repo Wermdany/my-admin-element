@@ -13,6 +13,7 @@ const mutations = {
   CANCEL(state, { funNames = [], msg = "用户手动取消网络请求" }) {
     if (!Object.keys(state.cancel).length) {
       Message.warning("当前不在任何一个请求周期内，无法取消任何请求");
+      return;
       // throw new Error("当前不在任何一个请求周期内，无法取消任何请求");
     }
     for (const key in state.cancel) {

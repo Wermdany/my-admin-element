@@ -9,13 +9,13 @@
       :noresize="false"
       style="height: 100%;"
     >
-      <div class="main-container" :class="{ 'has-tags-view': needTagsView }">
+      <div class="main-container" :class="{ 'has-tags-view': openTagsView }">
         <header
           class="header-container"
           :class="{ 'fixed-header': fixedHeader }"
         >
           <navbar />
-          <tags-view />
+          <tags-view v-if="openTagsView" />
         </header>
         <app-main />
         <my-footer />
@@ -41,7 +41,7 @@ export default {
     ...mapState({
       sidebar: state => state.app.sidebar,
       device: state => state.app.device,
-      needTagsView: state => state.app.openTagsView,
+      openTagsView: state => state.app.openTagsView,
       fixedHeader: state => state.app.fixedHeader,
       sidebarLogo: state => state.app.sidebarLogo
     }),

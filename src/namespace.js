@@ -1,7 +1,5 @@
 //命名空间
 
-// 存储用户信息的类型 cookie(未实现) | session | local
-export const SAVE_TYPE = "SAVE_TYPE";
 /**
  * 全局 UI尺寸
  */
@@ -26,8 +24,21 @@ export const OPEN_TAGS_VIEW = "OPEN_TAGS_VIEW";
  * 请求头 token 的名字
  */
 export const HTTP_HEADER_TOKEN_NAME = "auth-token";
+
 /**
  * 重复请求 Code ,应该避免和后台的请求错误码重复
  */
 
 export const REPEAT_REQUEST_CODE = 8888;
+
+/**
+ * 用户的个人信息，包括 Token
+ *
+ */
+export const USER_INFO = "USER_INFO";
+
+/**
+ * 请求返回状态码没有问题
+ */
+
+export const HTTP_PASS = 0;

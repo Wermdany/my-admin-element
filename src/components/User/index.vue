@@ -1,13 +1,28 @@
 <template>
   <el-dropdown trigger="click" @command="handleClick">
-    <div class="header-icon-item user un-login" v-if="isLogin">未登录</div>
-    <div class="header-icon-item user login" v-else>
+    <div class="header-icon-item user" v-if="isLogin" title="你还没有登陆">
+      未登录
+    </div>
+    <div class="header-icon-item user login" v-else title="个人信息">
       <img :src="avatar" />
       <!-- <i class="el-icon-caret-bottom tips"></i> -->
     </div>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item v-if="isLogin">登录</el-dropdown-item>
-      <el-dropdown-item v-if="!isLogin">退出</el-dropdown-item>
+      <el-dropdown-item v-if="isLogin" icon="el-icon-user" command="login"
+        >登录</el-dropdown-item
+      >
+      <el-dropdown-item
+        v-if="!isLogin"
+        icon="el-icon-user-solid"
+        command="userinfo"
+        >个人中心</el-dropdown-item
+      >
+      <el-dropdown-item
+        v-if="!isLogin"
+        icon="el-icon-switch-button"
+        command="logout"
+        >退出</el-dropdown-item
+      >
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -21,23 +36,36 @@ export default {
     elDropdownMenu: DropdownMenu
   },
   data() {
-    return {
-      isLogin: false,
-      avatar:
-        " https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/40/h/40"
-    };
+    return {};
   },
   computed: {
-    classObj() {
-      return {
-        "un-login": !this.isLogin
-      };
+    isLogin() {
+      return !this.$store.state.user.userData.name;
+    },
+    avatar() {
+      return this.$store.state.user.userData.avatar;
     }
   },
   methods: {
     handleClick(command) {
-      console.log(command);
-    }
+      this[command]();
+    },
+    login() {
+      const route = this.$route.path;
+      this.$router.replace({ path: "login?redirict=" + route });
+    },
+    logout() {
+      this.$store
+        .dispatch("user/logout")
+        .then(() => {
+          this.$message.success("退出成功！");
+          this.$router.replace({ path: "login" });
+        })
+        .catch(err => {
+          this.$message.warning(err.errMsg);
+        });
+    },
+    userinfo() { }
   }
 };
 </script>

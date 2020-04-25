@@ -57,7 +57,12 @@ export default {
         item => item.meta && item.meta.title
       );
       const first = matched[0];
-
+      const last = matched[matched.length - 1];
+      //首页下面也有子菜单，首页和最后一个会重复，直接显示就可以了
+      if (this.isDashboard(last)) {
+        this.levelList = [{ path: "/index", meta: { title: "首页" } }];
+        return;
+      }
       if (!this.isDashboard(first)) {
         matched = [{ path: "/index", meta: { title: "首页" } }].concat(matched);
       }
