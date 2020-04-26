@@ -6,7 +6,7 @@ module.exports = {
       process.env.ENV === "development" ? require("./service/index.js") : null
   },
   configureWebpack: {
-    devtool: "cheap-source-map"
-    // devtool: "source-map" //断点调试
+    // devtool: "cheap-source-map"
+    devtool: "source-map" //断点调试
   }
 };

@@ -36,7 +36,7 @@ const mutations = {
   SET_CANCEL(state, { cancel, funName }) {
     state.cancel[funName] = { cancel, response: false };
   },
-  CANCEL_ALL(state, msg) {
+  CANCEL_ALL(state, { msg }) {
     for (const key in state.cancel) {
       if (state.cancel.hasOwnProperty(key)) {
         if (!state.cancel[key].response) {

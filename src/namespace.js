@@ -42,3 +42,10 @@ export const USER_INFO = "USER_INFO";
  */
 
 export const HTTP_PASS = 0;
+
+/**
+ * 即使没有登陆也能访问的页面
+ *
+ */
+
+export const WHITE_PAGES_LIST = ["/login"];

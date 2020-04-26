@@ -11,3 +11,6 @@ export function userLogin({ data = {} }) {
 export function userLogout() {
   return http({ funName: "userLogout", method: "post", url: "logout" });
 }
+export function userRules() {
+  return http({ funName: "userRules", method: "post", url: "router" });
+}

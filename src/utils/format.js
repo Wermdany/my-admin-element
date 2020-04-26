@@ -9,14 +9,21 @@ export function componentToName(router, component) {
   }
   let res = [];
   router.forEach(item => {
+    console.log(item);
     if (component.hasOwnProperty(item.component)) {
-      item.component = component[item.component];
+      if (typeof item.component === "string") {
+        item.component = component[item.component];
+      }
       res.push(item);
       if (item.children && item.children.length) {
-        componentToName(item.children, component);
+        return componentToName(item.children, component);
       }
     } else {
-      throw new Error("缺少一个组件映射，组件名字为" + item.component);
+      if (item.hidden) {
+        res.push(item);
+      } else {
+        throw new Error("缺少一个组件映射，组件名字为：" + item.component);
+      }
     }
   });
   return res;

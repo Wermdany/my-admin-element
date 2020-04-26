@@ -13,7 +13,9 @@ export default {
   name: "Redirect",
   methods: {
     refreshPage() {
-      this.$router.replace({ path: "/redirect" + this.$route.fullPath });
+      this.$router.replace({
+        path: "/redirect" + this.$route.fullPath
+      });
     }
   },
   computed: {

@@ -3,5 +3,6 @@ export default {
   redirect: () => import("@/views/redirect/index"),
   index: () => import("@/views/index/index"),
   asd: () => import("@/views/index/index"),
-  login: () => import("@/views/login/index")
+  login: () => import("@/views/login/index"),
+  page404: () => import("@/views/error-page/404")
 };

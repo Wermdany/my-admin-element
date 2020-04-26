@@ -13,7 +13,7 @@
         mode="vertical"
       >
         <sidebar-item
-          v-for="item in route"
+          v-for="item in routes"
           :key="item.path"
           :item="item"
           :base-path="item.path"
@@ -27,7 +27,8 @@ import { Menu, Scrollbar, Tooltip } from "element-ui";
 import SidebarItem from "./SidebarItem";
 import Logo from "./Logo";
 import setting from "@/styles/variables.less";
-import route from "@/router/modules/constant.static";
+import { mapGetters } from "vuex";
+
 export default {
   name: "Sidebar",
   components: {
@@ -39,6 +40,7 @@ export default {
     Logo
   },
   computed: {
+    ...mapGetters(["routes"]),
     activeMenu() {
       return this.$route.path;
     },

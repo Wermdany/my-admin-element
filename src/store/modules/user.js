@@ -33,7 +33,7 @@ const actions = {
         .then(res => {
           if (res.code == HTTP_PASS) {
             commit("SET_USER_DATA", { data: res.data, type });
-            resolve();
+            resolve(res);
           } else {
             reject(res);
           }
@@ -49,7 +49,7 @@ const actions = {
         .then(res => {
           if (res.code == HTTP_PASS) {
             commit("DEL_USER_DATA");
-            resolve();
+            resolve(res);
           } else {
             reject(res);
           }

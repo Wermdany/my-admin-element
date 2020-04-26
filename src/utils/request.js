@@ -51,7 +51,7 @@ const responseInter = service.interceptors.response.use(
     return data;
   },
   err => {
-    // TODO: 网络错误的处理 收集返回错误信息
+    // 300 > validateStatus >= 200 、cancel
     const ErrJSon = {
       errMsg: err.message,
       name: err.name,

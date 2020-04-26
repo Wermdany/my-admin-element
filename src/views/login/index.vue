@@ -43,7 +43,6 @@
 <script>
 import { Input, Button, Form, FormItem, Checkbox } from "element-ui";
 import Tips from "@/components/Tips";
-import { userLogin } from "@/api/user";
 export default {
   components: {
     elInput: Input,
@@ -104,7 +103,7 @@ export default {
             .then(() => {
               this.$message.success("登陆成功！");
               this.loginLoading = false;
-              this.$router.push({ path: "/index" });
+              this.$router.push({ path: "/" });
             })
             .catch(err => {
               this.loginLoading = false;
