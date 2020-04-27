@@ -9,7 +9,6 @@ export function componentToName(router, component) {
   }
   let res = [];
   router.forEach(item => {
-    console.log(item);
     if (component.hasOwnProperty(item.component)) {
       if (typeof item.component === "string") {
         item.component = component[item.component];

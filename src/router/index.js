@@ -3,7 +3,8 @@ import Router from "vue-router";
 import nameToComponent from "./nameToComponent";
 import { componentToName } from "@/utils/format";
 import constant from "@/router/modules/constant.static";
-import tail from "@/router/modules/tail.static";
+import unLoginTail from "@/router/modules/unLoginTail.static";
+import store from "@/store";
 Vue.use(Router);
 
 /**
@@ -27,19 +28,19 @@ const createRouter = () =>
   });
 
 const router = new createRouter();
-router.addRoutes(componentToName(constant.concat(tail), nameToComponent));
+if (!store.getters.token) {
+  console.log(1);
+  router.addRoutes(
+    componentToName(constant.concat(unLoginTail), nameToComponent)
+  );
+}
 export function addRouter(route) {
-  console.log(3, router.matcher);
   const pushRoute = componentToName(route, nameToComponent);
-  console.log(33, pushRoute);
   router.addRoutes(pushRoute);
-  console.log(4, router.matcher);
 }
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter();
-  console.log(1, router.matcher);
   router.matcher = newRouter.matcher; // reset router
-  console.log(2, router.matcher);
 }
 export default router;

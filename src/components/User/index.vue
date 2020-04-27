@@ -61,7 +61,7 @@ export default {
           // 重置路由
           this.$store.dispatch("permission/resetRoutes").then(() => {
             this.$message.success("退出成功！");
-            this.$router.replace({ path: "login" });
+            this.$router.replace({ path: "/login" });
           });
         })
         .catch(err => {

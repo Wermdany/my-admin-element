@@ -4,11 +4,11 @@ const tail = [
     component: "page404",
     hidden: true,
     name: "404"
+  },
+  {
+    path: "*",
+    redirect: "/404",
+    hidden: true
   }
-  // {
-  //   path: "*",
-  //   redirect: "/404",
-  //   hidden: true
-  // }
 ];
 export default tail;

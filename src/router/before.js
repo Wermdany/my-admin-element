@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
           store
             .dispatch("permission/generateRoutes")
             .then(() => {
-              next({ ...to, replace: true }).catch(() => { });
+              next({ ...to, replace: true });
             })
             .catch(err => {
               console.log(err);

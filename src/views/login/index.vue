@@ -10,7 +10,8 @@
         <el-input
           v-model="form.userName"
           placeholder="请输入用户名"
-          autofocus
+          ref="userName"
+          @keyup.enter.native="enterHandleLogin"
         ></el-input>
       </el-form-item>
       <el-form-item prop="passWord">
@@ -19,6 +20,8 @@
           v-model="form.passWord"
           show-password
           placeholder="请输入密码"
+          ref="passWord"
+          @keyup.enter.native="enterHandleLogin"
         ></el-input>
       </el-form-item>
       <el-form-item class="checkbox">
@@ -72,8 +75,8 @@ export default {
     };
     return {
       form: {
-        userName: "admin",
-        passWord: "123456"
+        userName: "",
+        passWord: ""
       },
       rules: {
         userName: [
@@ -103,7 +106,14 @@ export default {
             .then(() => {
               this.$message.success("登陆成功！");
               this.loginLoading = false;
-              this.$router.push({ path: "/" });
+              this.$store
+                .dispatch("permission/generateRoutes")
+                .then(() => {
+                  this.$router.push({ path: "/" });
+                })
+                .catch(res => {
+                  this.$message.error(res.errMsg);
+                });
             })
             .catch(err => {
               this.loginLoading = false;
@@ -113,7 +123,35 @@ export default {
           this.$message.warning("请按要求填写字段");
         }
       });
+    },
+    autoFocus(e) {
+      const userName = this.$refs.userName;
+      if (userName.value === "") {
+        userName.focus();
+        if (e === "enter") {
+          userName.elForm.validateField(["userName"]);
+        }
+        return false;
+      }
+      const passWord = this.$refs.passWord;
+      if (passWord.value === "") {
+        passWord.focus();
+        if (e === "enter") {
+          userName.elForm.validateField(["passWord"]);
+        }
+        return false;
+      }
+      return true;
+      // console.log(userName, passWord);
+    },
+    enterHandleLogin() {
+      if (this.autoFocus("enter")) {
+        this.handleLogin();
+      }
     }
+  },
+  mounted() {
+    this.autoFocus();
   }
 };
 </script>
