@@ -9,7 +9,7 @@ import {
   OPEN_TAGS_VIEW,
   IS_COLLAPSE
 } from "@/namespace";
-import { getStorageNullToDefault } from "@/store/defaultVar";
+import { getStorageNullToDefault } from "@/utils/defaultVar";
 const state = {
   // 侧边栏
   sidebar: {

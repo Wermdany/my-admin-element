@@ -30,6 +30,6 @@ export function getStorageNullToDefault(namespace) {
       return res;
     }
   } else {
-    throw new Error(`是否缺少设置已经使用缓存变量 ${namespace} 的默认值`);
+    throw new Error(`是否缺少设置已经使用的缓存变量： ${namespace} 的默认值`);
   }
 }

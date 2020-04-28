@@ -6,8 +6,10 @@ import "@/router/before";
 import "@/styles/index.less";
 Vue.config.productionTip = false;
 import { Message } from "element-ui";
+import { UI_SIZE } from "@/namespace";
+import { getStorageNullToDefault } from "@/utils/defaultVar";
 Vue.prototype.$message = Message;
-Vue.prototype.$ELEMENT = { size: localStorage.getItem("size") || "medium" };
+Vue.prototype.$ELEMENT = { size: getStorageNullToDefault(UI_SIZE) };
 new Vue({
   router,
   store,

@@ -4,7 +4,7 @@
 
 import { userLogin, userLogout } from "@/api/user";
 import { USER_INFO, HTTP_PASS } from "@/namespace";
-import { getStorageNullToDefault } from "../defaultVar";
+import { getStorageNullToDefault } from "@/utils/defaultVar";
 import Storage from "@/utils/storage";
 
 const state = {

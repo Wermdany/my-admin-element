@@ -4,7 +4,7 @@
       <div class="login__logo">
         <img class="logo" src="@/assets/logo.png" alt="" />
       </div>
-      <div class="login__title">My-Admin-Element</div>
+      <div class="login__title">{{ pageTitle }}</div>
       <el-form-item prop="userName">
         <span class="icon"><i class="el-icon-user-solid"></i></span>
         <el-input
@@ -46,6 +46,7 @@
 <script>
 import { Input, Button, Form, FormItem, Checkbox } from "element-ui";
 import Tips from "@/components/Tips";
+import { DEFAULT_PAGE_TITLE } from "@/namespace";
 export default {
   components: {
     elInput: Input,
@@ -73,6 +74,7 @@ export default {
         callback();
       }
     };
+    this.pageTitle = DEFAULT_PAGE_TITLE;
     return {
       form: {
         userName: "",

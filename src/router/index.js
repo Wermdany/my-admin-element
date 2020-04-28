@@ -29,7 +29,6 @@ const createRouter = () =>
 
 const router = new createRouter();
 if (!store.getters.token) {
-  console.log(1);
   router.addRoutes(
     componentToName(constant.concat(unLoginTail), nameToComponent)
   );

@@ -1,7 +1,7 @@
 //命名空间
 
 /**
- * 全局 UI尺寸
+ * 全局 UI 尺寸
  */
 export const UI_SIZE = "UI_SIZE";
 /**
@@ -49,3 +49,7 @@ export const HTTP_PASS = 0;
  */
 
 export const WHITE_PAGES_LIST = ["/login"];
+/**
+ * 页面的默认 title
+ */
+export const DEFAULT_PAGE_TITLE = "My Admin Element";

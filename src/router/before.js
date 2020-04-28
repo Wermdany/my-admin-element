@@ -2,10 +2,13 @@ import router from "@/router";
 import store from "@/store";
 import Nprogress from "nprogress";
 import { WHITE_PAGES_LIST } from "@/namespace";
+import { getPageTitle } from "@/utils/getPageTitle";
 Nprogress.configure({
   showSpinner: false
 });
+
 router.beforeEach((to, from, next) => {
+  document.title = getPageTitle(to.meta && to.meta.title);
   if (to.name !== "redirect" && to.name !== "redirect-all") {
     // console.log(to.name == "redirect" || to.name == "redirect-all");
     Nprogress.start();
