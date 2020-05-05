@@ -50,6 +50,10 @@ export const HTTP_PASS = 0;
 
 export const WHITE_PAGES_LIST = ["/login"];
 /**
+ * 从不显示在TagViews的页面的name,并且从不缓存
+ */
+export const NEVER_SHOW_TAG_VIEW_PAGES_NAME = ["redirect", "redirect-all"];
+/**
  * 页面的默认 title
  */
 export const DEFAULT_PAGE_TITLE = "My Admin Element";

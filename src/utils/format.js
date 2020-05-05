@@ -27,3 +27,31 @@ export function componentToName(router, component) {
   });
   return res;
 }
+
+export function formatRedirect(str) {
+  const first = str.indexOf("?");
+  if (first == -1) {
+    return {
+      redirect: str
+    };
+  } else {
+    const redirect = str.substr(0, first);
+    const queryAll = str.substr(first + 1);
+    if (queryAll === "") {
+      return {
+        redirect
+      };
+    } else {
+      const queryObj = queryAll.split("&");
+      const query = {};
+      queryObj.forEach(item => {
+        const ad = item.split("=");
+        query[ad[0]] = ad[1];
+      });
+      return {
+        redirect,
+        query
+      };
+    }
+  }
+}

@@ -3,4 +3,95 @@
 .tags-view-container {
   height: @tagsViewHeight;
 
+  .tags-view-item {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    height: @tagsViewItemHeight;
+    line-height: @tagsViewItemHeight;
+    padding: 0 8px;
+    font-size: 12px;
+    color: #000;
+    background: #FFF;
+    border-radius: 2px;
+    margin-left: 5px;
+    margin-top: 2px;
+    border: 1px solid #ebeef5;
+
+    &:hover {
+      background: @Bg;
+      border-color: @Bg;
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    .el-icon-close {
+      margin-left: 2px;
+      padding: 2px;
+      vertical-align: text-top;
+      transform: scale(.9);
+
+      &:hover {
+        background: red;
+        color: #FFF;
+        border-radius: 50%;
+      }
+    }
+
+    &.active {
+      border-color: @base-color-default;
+      background-color: @base-color-default;
+      color: #FFF;
+
+      &::before {
+        background: #FFF;
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        position: relative;
+        display: inline-block;
+        margin-right: 2px;
+      }
+    }
+  }
+
+  &:first-of-type {
+    margin-left: 15px;
+  }
+
+  &:last-of-type {
+    margin-right: 15px;
+  }
+
+  .contextmenu {
+    margin: 0;
+    background: #fff;
+    z-index: 3000;
+    position: absolute;
+    list-style-type: none;
+    padding: 5px 0;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #333;
+    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3);
+
+    li {
+      margin: 0;
+      padding: 7px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: #eee;
+      }
+
+      i {
+        margin-right: 5px;
+      }
+    }
+  }
+
 }

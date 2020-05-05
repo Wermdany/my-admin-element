@@ -52,7 +52,10 @@ export default {
     },
     login() {
       const route = this.$route.path;
-      this.$router.replace({ path: "login?redirict=" + route });
+      this.$router.replace({
+        path: "/login",
+        query: { redirict: route, ...route.query }
+      });
     },
     logout() {
       this.$store

@@ -4,6 +4,7 @@ import unLoginTail from "@/router/modules/unLoginTail.static";
 import { userRules } from "@/api/user";
 import { HTTP_PASS } from "@/namespace";
 import { resetRouter, addRouter } from "@/router";
+import path from "path";
 
 function addDefaultRedirect(route) {
   if (!Array.isArray(route)) {
@@ -14,10 +15,18 @@ function addDefaultRedirect(route) {
     redirect: route[0].path,
     hidden: true
   };
-  const first = route[0];
-  if (first.redirect && first.children) {
+  let first = route[0];
+  if (first.redirect && first.children.length > 0) {
     // 目前只能查找一级
     defaultRedirect.redirect = first.redirect;
+    for (let i = 0; i < first.children.length; i++) {
+      if (path.resolve(first.path, first.children[i].path) === first.redirect) {
+        first.children[i].meta.affix = true;
+      }
+    }
+  } else {
+    first.meta = { affix: true, ...first.meta };
+    route.splice(1, first);
   }
   route.unshift(defaultRedirect);
   return route;

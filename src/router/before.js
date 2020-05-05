@@ -9,8 +9,8 @@ Nprogress.configure({
 
 router.beforeEach((to, from, next) => {
   document.title = getPageTitle(to.meta && to.meta.title);
+
   if (to.name !== "redirect" && to.name !== "redirect-all") {
-    // console.log(to.name == "redirect" || to.name == "redirect-all");
     Nprogress.start();
     store.dispatch("app/togglePageLoading", true);
   }
@@ -51,9 +51,10 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (WHITE_PAGES_LIST.includes(to.path)) {
+      console.log(to);
       next();
     } else {
-      next({ path: "/login", query: { redirect: to.path } });
+      next({ path: "/login", query: { redirect: to.path, ...to.query } });
       Nprogress.done();
     }
   }

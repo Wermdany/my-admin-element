@@ -9,7 +9,7 @@ export default {
   redirect: "",
   //是否始终显示根路由，默认渲染的时候，如果一个父路由下只有一个子路由就会只渲染子路由，当这个为true的时候，会始终渲染父路由 + 子路由 的嵌套关系
   alwaysShow: true,
-  //*路由的名字
+  //*路由的名字，如果你想要这个页面被正确的缓存状态，那么最好和这个页面应用的组件/页面中的 name 字段保持一致
   name: "",
   // *路由元数据
   meta: {
@@ -21,6 +21,7 @@ export default {
     cache: true,
     // 如果设置为false，则不会在breadcrumb面包屑中显示
     breadcrumb: true,
+    //固定在tagsViews
     affix: false
   },
   // *

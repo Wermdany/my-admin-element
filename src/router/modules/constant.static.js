@@ -17,28 +17,6 @@ const constent = [
       }
     ]
   },
-  // {
-  //   path: "/",
-  //   component: "main",
-  //   redirect: "/index",
-  //   meta: { title: "主题", icon: "delete" },
-  //   children: [
-  //     {
-  //       path: "index",
-  //       component: "index",
-  //       name: "index",
-  //       affix: true,
-  //       meta: { title: "布局", icon: "delete" }
-  //     },
-  //     {
-  //       path: "ad",
-  //       component: "index",
-  //       name: "index1",
-  //       affix: true,
-  //       meta: { title: "布局1", icon: "delete" }
-  //     }
-  //   ]
-  // },
   {
     path: "/login",
     component: "login",

@@ -1,5 +1,6 @@
 <template>
   <ul class="main">
+    <el-input v-model="Input"></el-input>
     <el-button @click="get" type="primary">请求</el-button>
     <el-button @click="cancel" type="danger">取消请求</el-button>
     <li v-for="i in 100" :key="i">{{ i }}</li>
@@ -7,15 +8,18 @@
 </template>
 <script>
 import { test, testOne } from "@/api/test";
-import { Button } from "element-ui";
+import { Button, Input } from "element-ui";
 import { alwayResolve } from "@/utils";
 export default {
   name: "index",
   components: {
-    elButton: Button
+    elButton: Button,
+    elInput: Input
   },
   data() {
-    return {};
+    return {
+      Input: ""
+    };
   },
   created() {
     this.get();

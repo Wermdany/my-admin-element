@@ -47,7 +47,9 @@
 import { Input, Button, Form, FormItem, Checkbox } from "element-ui";
 import Tips from "@/components/Tips";
 import { DEFAULT_PAGE_TITLE } from "@/namespace";
+import { formatRedirect } from "@/utils/format";
 export default {
+  name: "login",
   components: {
     elInput: Input,
     elButton: Button,
@@ -77,8 +79,8 @@ export default {
     this.pageTitle = DEFAULT_PAGE_TITLE;
     return {
       form: {
-        userName: "",
-        passWord: ""
+        userName: "admin",
+        passWord: "123456"
       },
       rules: {
         userName: [
@@ -89,8 +91,28 @@ export default {
         ]
       },
       saveUserData: true,
-      loginLoading: false
+      loginLoading: false,
+      redirect: undefined,
+      query: {}
     };
+  },
+  watch: {
+    $route: {
+      handler(route) {
+        if (route.redirectedFrom) {
+          const format = formatRedirect(this.$route.redirectedFrom);
+          this.redirect = format.redirect;
+          this.query = format.query;
+          return;
+        }
+        const query = route.query;
+        if (query) {
+          this.redirect = query.redirect;
+          this.query = this.getOtherQuery(query);
+        }
+      },
+      immediate: true
+    }
   },
   methods: {
     handleLogin() {
@@ -111,7 +133,10 @@ export default {
               this.$store
                 .dispatch("permission/generateRoutes")
                 .then(() => {
-                  this.$router.push({ path: "/" });
+                  this.$router.push({
+                    path: this.redirect || "/",
+                    query: this.query
+                  });
                 })
                 .catch(res => {
                   this.$message.error(res.errMsg);
@@ -150,10 +175,15 @@ export default {
       if (this.autoFocus("enter")) {
         this.handleLogin();
       }
+    },
+    getOtherQuery(query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== "redirect") {
+          acc[cur] = query[cur];
+        }
+        return acc;
+      }, {});
     }
-  },
-  mounted() {
-    this.autoFocus();
   }
 };
 </script>

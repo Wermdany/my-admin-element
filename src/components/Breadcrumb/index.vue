@@ -23,6 +23,7 @@ import pathToRegexp from "path-to-regexp";
 import AppLink from "@/layouts/components/Sidebar/Link";
 import { mapGetters } from "vuex";
 export default {
+  name: "Breadcrumb",
   components: {
     elBreadcrumb: Breadcrumb,
     elBreadcrumbItem: BreadcrumbItem,
