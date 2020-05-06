@@ -1,0 +1,47 @@
+@import "~@/styles/variables.less";
+
+.header-search-select {
+  height: @headerHeight;
+  margin-right: 10px;
+  width: 150px;
+  vertical-align: text-bottom;
+
+  .el-input__inner {
+    border-radius: 15px;
+  }
+
+  .el-input--medium {
+    .el-input__inner {
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+
+  .el-input--small {
+    .el-input__inner {
+      height: 28px;
+      line-height: 28px;
+    }
+  }
+
+  .el-input--mini {
+    .el-input__inner {
+      height: 25px;
+      line-height: 25px;
+    }
+  }
+
+}
+
+.header-search-option {
+  height: auto;
+  line-height: 1.5;
+  padding: 5px 20px;
+
+  .name {}
+
+  .path {
+    color: @menuText;
+    font-size: 12px;
+  }
+}

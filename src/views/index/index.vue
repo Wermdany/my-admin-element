@@ -1,7 +1,7 @@
 <template>
   <ul class="main">
     <el-input v-model="Input"></el-input>
-    <el-button @click="get" type="primary">请求</el-button>
+    <el-button @click="get" type="primary">请求1</el-button>
     <el-button @click="cancel" type="danger">取消请求</el-button>
     <li v-for="i in 100" :key="i">{{ i }}</li>
   </ul>

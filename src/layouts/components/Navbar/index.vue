@@ -3,6 +3,7 @@
     <hamburger @toggleClick="toggleClick" :is-collapse="sidebar" />
     <breadcrumb />
     <div class="nav-menu--right">
+      <header-search />
       <size-selete />
       <setting />
       <redirct />
@@ -17,6 +18,7 @@ import SizeSelete from "@/components/SizeSelect";
 import Redirct from "@/components/Redirect";
 import User from "@/components/User";
 import Setting from "@/layouts/components/Settings";
+import HeaderSearch from "@/components/HeaderSearch";
 import { mapState } from "vuex";
 export default {
   name: "NavBar",
@@ -26,7 +28,8 @@ export default {
     SizeSelete,
     Setting,
     User,
-    Redirct
+    Redirct,
+    HeaderSearch
   },
   computed: {
     ...mapState({
