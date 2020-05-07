@@ -52,9 +52,6 @@ export default {
     },
     sidebarLogo() {
       return this.$store.state.app.sidebarLogo;
-    },
-    route() {
-      return route;
     }
   }
 };

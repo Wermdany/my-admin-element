@@ -1,5 +1,10 @@
 <template>
   <div :class="classObj" class="app-wrapper">
+    <div
+      v-if="device === 'mobile' && !sidebar.isCollapse"
+      class="drawer-bg"
+      @click="handleClickOutside"
+    />
     <sidebar
       class="sidebar-container"
       :class="{ 'has-logo': sidebarLogo }"
@@ -27,6 +32,7 @@
 import { AppMain, TagsView, Sidebar, Navbar, Footer } from "../components/main";
 import { mapState } from "vuex";
 import { Scrollbar } from "element-ui";
+import ResizeMixin from "@/layouts/mixin/ResizeHandler";
 export default {
   name: "LayOutMain",
   components: {
@@ -37,6 +43,7 @@ export default {
     Navbar,
     myFooter: Footer
   },
+  mixins: [ResizeMixin],
   computed: {
     ...mapState({
       sidebar: state => state.app.sidebar,
@@ -48,10 +55,14 @@ export default {
     classObj() {
       return {
         "hidden-sidebar": this.sidebar.isCollapse,
-        openSidebar: this.sidebar.isCollapse,
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === "mobile"
       };
+    }
+  },
+  methods: {
+    handleClickOutside() {
+      this.$store.dispatch("app/closeSideBar", { withoutAnimation: false });
     }
   }
 };

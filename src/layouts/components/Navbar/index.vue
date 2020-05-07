@@ -3,10 +3,12 @@
     <hamburger @toggleClick="toggleClick" :is-collapse="sidebar" />
     <breadcrumb />
     <div class="nav-menu--right">
-      <header-search />
-      <size-selete />
-      <setting />
-      <redirct />
+      <template v-if="device !== 'mobile'">
+        <header-search />
+        <size-selete />
+        <setting />
+        <redirct />
+      </template>
       <user />
     </div>
   </nav>
@@ -33,7 +35,8 @@ export default {
   },
   computed: {
     ...mapState({
-      sidebar: state => state.app.sidebar.isCollapse
+      sidebar: state => state.app.sidebar.isCollapse,
+      device: state => state.app.device
     })
   },
   methods: {

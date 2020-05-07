@@ -57,3 +57,8 @@ export const NEVER_SHOW_TAG_VIEW_PAGES_NAME = ["redirect", "redirect-all"];
  * 页面的默认 title
  */
 export const DEFAULT_PAGE_TITLE = "My Admin Element";
+
+/**
+ * 页面尺寸临界 MD
+ */
+export const MD_WIDTH = 992;

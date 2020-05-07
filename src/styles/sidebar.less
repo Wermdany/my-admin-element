@@ -104,3 +104,52 @@
       height: calc(100% - @headerHeight) !important;
     }
   }
+
+  // mobile responsive
+  .mobile {
+
+    .drawer-bg {
+      background: #000;
+      opacity: 0.3;
+      width: 100%;
+      top: 0;
+      height: 100%;
+      position: absolute;
+      z-index: 999;
+    }
+
+    &.hidden-sidebar .main-container {
+      margin-left: 0px !important;
+    }
+
+    .main-container {
+      margin-left: 0px !important;
+    }
+
+    .fixed-header {
+      width: 100% !important;
+    }
+
+    .sidebar-container {
+      transition: transform .28s;
+      width: @sideBarWidth  !important;
+    }
+
+    &.hidden-sidebar {
+      .sidebar-container {
+        pointer-events: none;
+        transition-duration: 0.3s;
+        transform: translate3d(-@sideBarWidth, 0, 0);
+      }
+    }
+  }
+
+  .withoutAnimation {
+
+    .header-container,
+    .main-container,
+    .sidebar-container {
+      transition: none;
+    }
+
+  }

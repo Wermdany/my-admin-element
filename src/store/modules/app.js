@@ -15,7 +15,7 @@ const state = {
   sidebar: {
     // 是否缩进
     isCollapse: getStorageNullToDefault(IS_COLLAPSE),
-    // 是否开启动画
+    // 是否开启动画,解决页面缩放或者不同尺寸下动画闪烁问题
     withoutAnimation: false
   },
   // 当前视窗大小
@@ -32,9 +32,15 @@ const state = {
   pageLoading: true
 };
 const mutations = {
-  TOGGLE_SIDEBAR: state => {
-    Storage.set(IS_COLLAPSE, !state.sidebar.isCollapse);
-    state.sidebar.isCollapse = !state.sidebar.isCollapse;
+  TOGGLE_SIDEBAR: (state, status) => {
+    state.sidebar.withoutAnimation = false;
+    if (status === undefined) {
+      Storage.set(IS_COLLAPSE, !state.sidebar.isCollapse);
+      state.sidebar.isCollapse = !state.sidebar.isCollapse;
+    } else {
+      Storage.set(IS_COLLAPSE, status);
+      state.sidebar.isCollapse = status;
+    }
   },
   TOGGLE_FIXED_HEADER: state => {
     Storage.set(FIXED_HEADER, !state.fixedHeader);
@@ -54,11 +60,19 @@ const mutations = {
   },
   TOGGLE_PAGE_LOADING: (state, data) => {
     state.pageLoading = data;
+  },
+  CLOSE_SIDEBAR: (state, withoutAnimation) => {
+    state.sidebar.withoutAnimation = withoutAnimation;
+    Storage.set(IS_COLLAPSE, true);
+    state.sidebar.isCollapse = true;
+  },
+  TOGGLE_DEVICE: (state, device) => {
+    state.device = device;
   }
 };
 const actions = {
-  toggleSideBar({ commit }) {
-    commit("TOGGLE_SIDEBAR");
+  toggleSideBar({ commit }, status) {
+    commit("TOGGLE_SIDEBAR", status);
   },
   toggleFixedHeader({ commit }) {
     commit("TOGGLE_FIXED_HEADER");
@@ -74,6 +88,12 @@ const actions = {
   },
   setSize({ commit }, size) {
     commit("SET_SIZE", size);
+  },
+  closeSideBar({ commit }, { withoutAnimation }) {
+    commit("CLOSE_SIDEBAR", withoutAnimation);
+  },
+  toggleDevice({ commit }, device) {
+    commit("TOGGLE_DEVICE", device);
   }
 };
 export default {
