@@ -197,7 +197,7 @@ export default {
 .login-contianer {
   width: 100%;
   height: 100%;
-  background: @menuHover;
+  background: @menuBg;
   /deep/.el-form {
     width: 480px;
     max-width: 100%;

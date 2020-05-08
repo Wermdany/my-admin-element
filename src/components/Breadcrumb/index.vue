@@ -20,7 +20,7 @@
 <script>
 import { Breadcrumb, BreadcrumbItem } from "element-ui";
 import pathToRegexp from "path-to-regexp";
-import AppLink from "@/layouts/components/Sidebar/Link";
+import AppLink from "@/layouts/components/Link";
 import { mapGetters } from "vuex";
 export default {
   name: "Breadcrumb",

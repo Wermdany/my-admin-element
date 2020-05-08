@@ -9,6 +9,7 @@
     top: 0;
     left: 0;
     bottom: 0;
+    box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
 
     .el-scrollbar {
       height: 100% !important;
@@ -49,41 +50,62 @@
     color: @menuActiveText  !important;
   }
 
-  .hidden-sidebar {
-    .sidebar-container {
-      width: @sideBarHiddenWidth  !important;
+  // 修改 el-menu-item hover
+  .el-menu {
+
+    //添加渐变动画
+    .el-submenu__title,
+    .el-menu-item,
+    .el-submenu__title i,
+    .el-menu-item i {
+      transition: all 0.28s;
+
+      //hover 颜色变化
+      &:hover,
+      &:hover i {
+        color: #FFF !important;
+      }
     }
   }
 
-  //logo 组件
-  .logo-container {
-    height: @headerHeight;
-    width: @sideBarWidth ;
-    background: @subMenuBg;
-    transition: width .28s;
-    line-height: @headerHeight;
-    overflow: hidden;
+  //修改el-menu-item active
 
-    >a {
-      width: 100%;
-      display: inline-block;
-      text-align: center;
+  .el-menu {
 
-      >img {
-        display: inline-block;
-        width: @headerFontSize * 1.8;
-        height: @headerFontSize * 1.8;
-        line-height: @headerHeight;
-        vertical-align: middle;
+    //选中的时候
+    .el-submenu.is-active {
+
+      //submenu 颜色恒定
+      .el-submenu__title,
+      .el-submenu__title i {
+        color: @subMenuActiveText  !important;
+        background: none !important;
       }
 
-      >h1 {
-        display: inline-block;
-        color: white;
-        font-weight: bold;
-        vertical-align: middle;
-        font-size: @headerFontSize / 1.4;
+      //修改 展开 item color
+      .el-submenu__title+.el-menu.el-menu--inline,
+      .el-submenu__title+.el-menu.el-menu--inline .el-menu-item {
+        background: @subMenuBg  !important;
+
+        //选中的时候
+        &.is-active {
+          color: @menuActiveText  !important;
+          background: @menuActiveBg  !important;
+        }
       }
+
+    }
+  }
+
+  //收缩下选中的样式
+  .el-menu--vertical .el-menu-item.is-active {
+    color: @menuActiveText  !important;
+    background: @menuActiveBg  !important;
+  }
+
+  .hidden-sidebar {
+    .sidebar-container {
+      width: @sideBarHiddenWidth  !important;
     }
   }
 
@@ -140,6 +162,7 @@
         pointer-events: none;
         transition-duration: 0.3s;
         transform: translate3d(-@sideBarWidth, 0, 0);
+        box-shadow: none;
       }
     }
   }

@@ -22,7 +22,9 @@ export default {
     // 如果设置为false，则不会在breadcrumb面包屑中显示
     breadcrumb: true,
     //固定在tagsViews
-    affix: false
+    affix: false,
+    //页面的详细介绍
+    detail: ""
   },
   // *
   children: []

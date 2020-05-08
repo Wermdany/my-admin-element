@@ -1,0 +1,32 @@
+@import "~@/styles/variables.less";
+
+.logo-container {
+  height: @headerHeight;
+  width: @sideBarWidth ;
+  background: @menuBg;
+  transition: width .28s;
+  line-height: @headerHeight;
+  overflow: hidden;
+
+  >a {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+
+    >img {
+      display: inline-block;
+      width: @headerFontSize * 1.8;
+      height: @headerFontSize * 1.8;
+      line-height: @headerHeight;
+      vertical-align: middle;
+    }
+
+    >h1 {
+      display: inline-block;
+      color: white;
+      font-weight: bold;
+      vertical-align: middle;
+      font-size: @headerFontSize / 1.4;
+    }
+  }
+}

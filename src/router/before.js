@@ -51,7 +51,6 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (WHITE_PAGES_LIST.includes(to.path)) {
-      console.log(to);
       next();
     } else {
       next({ path: "/login", query: { redirect: to.path, ...to.query } });

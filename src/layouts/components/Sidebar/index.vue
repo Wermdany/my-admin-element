@@ -25,7 +25,7 @@
 <script>
 import { Menu, Scrollbar, Tooltip } from "element-ui";
 import SidebarItem from "./SidebarItem";
-import Logo from "./Logo";
+import Logo from "@/layouts/components/Logo";
 import setting from "@/styles/variables.less";
 import { mapGetters } from "vuex";
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!item.hidden">
+  <div v-if="!item.hidden" :title="item.meta && item.meta.detail">
     <template
       v-if="
         hasOneShowingChild(item.children, item) &&
@@ -16,7 +16,12 @@
         </el-menu-item>
       </app-link>
     </template>
-    <el-submenu v-else ref="subMenu" popper-append-to-body :index="resolvePath(item.path)">
+    <el-submenu
+      v-else
+      ref="subMenu"
+      popper-append-to-body
+      :index="resolvePath(item.path)"
+    >
       <template slot="title">
         <item
           v-if="item.meta"
@@ -38,7 +43,7 @@ import path from "path";
 import { isExternal } from "@/utils/validate";
 import { Submenu, MenuItem } from "element-ui";
 import Item from "./Item";
-import AppLink from "./Link";
+import AppLink from "@/layouts/components/Link";
 
 export default {
   name: "SidebarItem",

@@ -24,13 +24,10 @@ export const OPEN_TAGS_VIEW = "OPEN_TAGS_VIEW";
  * 请求头 token 的名字
  */
 export const HTTP_HEADER_TOKEN_NAME = "auth-token";
-
 /**
  * 重复请求 Code ,应该避免和后台的请求错误码重复
  */
-
 export const REPEAT_REQUEST_CODE = 8888;
-
 /**
  * 用户的个人信息，包括 Token
  *
@@ -47,7 +44,6 @@ export const HTTP_PASS = 0;
  * 即使没有登陆也能访问的页面
  *
  */
-
 export const WHITE_PAGES_LIST = ["/login"];
 /**
  * 从不显示在TagViews的页面的name,并且从不缓存
@@ -59,6 +55,10 @@ export const NEVER_SHOW_TAG_VIEW_PAGES_NAME = ["redirect", "redirect-all"];
 export const DEFAULT_PAGE_TITLE = "My Admin Element";
 
 /**
- * 页面尺寸临界 MD
+ * 页面尺寸临界 SM 768px
  */
-export const MD_WIDTH = 992;
+export const SM_WIDTH = 768;
+/**
+ * 页面临界值 LG 1200px
+ */
+export const LG_WIDTH = 1120;

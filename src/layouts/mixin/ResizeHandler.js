@@ -1,5 +1,5 @@
 import store from "@/store";
-import { MD_WIDTH } from "@/namespace";
+import { SM_WIDTH, LG_WIDTH } from "@/namespace";
 const { body } = document;
 
 export default {
@@ -28,7 +28,11 @@ export default {
     // https://vuejs.org/v2/style-guide/index.html#Private-property-names-essential
     $_isMobile() {
       const rect = body.getBoundingClientRect();
-      return rect.width - 1 < MD_WIDTH;
+      console.log(rect);
+      return rect.width - 1 < SM_WIDTH;
+    },
+    $_getNowState() { 
+      
     },
     $_resizeHandler() {
       if (!document.hidden) {

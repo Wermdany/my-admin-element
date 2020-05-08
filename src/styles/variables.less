@@ -1,18 +1,36 @@
 // less变量
 @base-color-default: #1890ff;
+
+//sidebar 
+//所有默认颜色
 @menuText: #bfcbd9;
-@menuActiveText: #409EFF;
-@subMenuActiveText: #f4f4f5;
-@menuBg: #304156;
-@menuHover: #263445;
-@subMenuBg: #1f2d3d;
-@subMenuHover: #001528;
-@sideBarWidth: 210px;
-@Bg :#f0f2f5;
-@headerHeight: 50px;
-@headerFontSize: 20px; // 头部的字体大小的两倍必须小于头部高度
+// 所有默认背景色
+@menuBg: #001529;
+// 子菜单选中颜色
+@menuActiveText: #fff;
+// 子菜单选中背景色
+@menuActiveBg: #1890ff;
+// 子菜单标题选中颜色
+@subMenuActiveText: #FFF;
+// 子菜单背景色
+@subMenuBg: #000c17;
+//展开侧边栏宽度
+@sideBarWidth: 240px;
+// 收缩侧边栏宽度
 @sideBarHiddenWidth: 64px;
+
+// common
+// 背景色
+@Bg :#f0f2f5;
+
+//header
+// 头部高度
+@headerHeight: 50px;
+// 头部内字体
+@headerFontSize: 20px; // 头部的字体大小的两倍必须小于头部高度
+// tags view 高度
 @tagsViewHeight: 35px;
+// tags view 内部标签高度 必须小于整体高度
 @tagsViewItemHeight: 30px;
 
 :export {
@@ -20,9 +38,7 @@
   menuActiveText: @menuActiveText;
   subMenuActiveText: @subMenuActiveText;
   menuBg: @menuBg;
-  menuHover: @menuHover;
   subMenuBg: @subMenuBg;
-  subMenuHover: @subMenuHover;
   sideBarWidth: @sideBarWidth;
   Bg: @Bg;
   headerHeight: @headerHeight;
