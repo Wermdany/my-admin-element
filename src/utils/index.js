@@ -1,3 +1,4 @@
+import { isObject } from "@/utils/validate";
 /**
  * Promise 总是抛出 resolve
  * @param {Object} promiseObj promise 对象
@@ -62,4 +63,30 @@ export function debounce(fn, delay, immediate) {
       timer = setTimeout(fn, delay);
     }
   };
+}
+export function deepCopyRoute(route) {
+  if (!Array.isArray(route))
+    throw new Error("类型错误：传入的路由表不是一个数组");
+  let res = [];
+  route.forEach(item => {
+    res.push(copyObject(item));
+  });
+  return res;
+}
+function copyObject(obj) {
+  if (isObject(obj)) {
+    let newObj = {};
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        if (key === "meta") {
+          newObj[key] = copyObject(obj[key]);
+        }
+        if (key === "children" && obj[key].length != 0) {
+          newObj[key] = deepCopyRoute(obj[key]);
+        }
+        newObj[key] = obj[key];
+      }
+    }
+    return newObj;
+  }
 }

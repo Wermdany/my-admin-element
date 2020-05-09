@@ -1,10 +1,15 @@
-import constant from "@/router/modules/constant.static";
-import tail from "@/router/modules/tail.static";
-import unLoginTail from "@/router/modules/unLoginTail.static";
+import heads from "@/router/modules/common/head.route";
+import loginTails from "@/router/modules/common/loginTail.route";
+import unLoginTails from "@/router/modules/common/unLoginTail.route";
 import { userRules } from "@/api/user";
 import { HTTP_PASS } from "@/namespace";
 import { resetRouter, addRouter } from "@/router";
 import path from "path";
+import deepCopy from "deepcopy";
+//深拷贝，防止浅拷贝下 其他属性也被Vue劫持
+const head = deepCopy(heads);
+const loginTail = deepCopy(loginTails);
+const unLoginTail = deepCopy(unLoginTails);
 
 function addDefaultRedirect(route) {
   if (!Array.isArray(route)) {
@@ -36,7 +41,7 @@ function addDefaultRedirect(route) {
  */
 const state = {
   // 总路由
-  routes: constant.concat(unLoginTail),
+  routes: head.concat(unLoginTail),
   // 添加的路由，判断是获取到路由的标识
   addRoutes: [],
   firstRedirect: {}
@@ -44,7 +49,7 @@ const state = {
 const mutations = {
   SET_ROUTERS: (state, addRoutes) => {
     const add = addDefaultRedirect(addRoutes);
-    const all = constant.concat(addRoutes, tail);
+    const all = head.concat(addRoutes, loginTail);
     resetRouter();
     addRouter(all);
     state.firstRedirect = add[0];
@@ -52,7 +57,7 @@ const mutations = {
     state.routes = all;
   },
   RESET_ROUTERS: state => {
-    const all = constant.concat(unLoginTail);
+    const all = head.concat(unLoginTail);
     resetRouter();
     addRouter(all);
     state.addRoutes = [];
@@ -66,7 +71,7 @@ const actions = {
       userRules()
         .then(res => {
           if (res.code == HTTP_PASS) {
-            commit("SET_ROUTERS", [res.data]);
+            commit("SET_ROUTERS", res.data);
             resolve();
           } else {
             reject(res);

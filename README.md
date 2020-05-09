@@ -128,7 +128,9 @@ TagViews 主要是在用户打开大量页面的时候，方便用户的切换�
 
 我个人习惯使用 less ，使用 webpack 内置的[模块化系统](https://webpack.docschina.org/concepts/modules) 同样可以解决 less(variables)-to-js 的问题。
 
-### 增加了全局的虚拟滚动条
+### 增加了全局的虚拟滚动条 ❗
+
+> 虚拟滚动条原理是使用了CSS3 transform translateY ，会导致内部元素无法获取相相对滚动位置，比如内置的 [Sticky组件](/src/components/SizeSelect/index.vue),会无效，如果项目中没有用到此类需要判断滚动的功能，可以使用
 
 参照了 `sidebar` 的滚动条解决方法， 同样使用了 `el-scrollbar` 组件（可能会造成没必要的性能损耗）。
 

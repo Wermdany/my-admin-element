@@ -24,7 +24,7 @@ export default {
     //固定在tagsViews
     affix: false,
     //页面的详细介绍
-    detail: ""
+    introduce: ""
   },
   // *
   children: []

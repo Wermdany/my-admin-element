@@ -78,3 +78,7 @@ export function validJSON(str) {
   const reg = /[\\[\\]\\{\\}]/;
   return reg.test(str);
 }
+
+export function isObject(obj) {
+  return typeof obj === "object" && obj !== null;
+}

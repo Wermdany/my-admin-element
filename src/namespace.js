@@ -62,3 +62,15 @@ export const SM_WIDTH = 768;
  * 页面临界值 LG 1200px
  */
 export const LG_WIDTH = 1120;
+
+/**
+ * 是否开启 route 的组件映射模块化命名 开启的话,route需要加上模块化的前缀
+ *
+ * 主要解决项目过大，不同模块又相同的名字问题，而最终所有的路由映射都会合并，防止冲突
+ *
+ * 比如：不同等级的管理员都有首页 那么
+ *
+ *  superAdmin/index => superAdmin_index
+ *  admin/index  => admin_index
+ */
+export const OPEN_ROUTE_MODULE_NAME = false;

@@ -6,4 +6,5 @@ const tail = [
     hidden: true
   }
 ];
+Object.freeze(tail);
 export default tail;

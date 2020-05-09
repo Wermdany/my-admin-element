@@ -10,9 +10,19 @@ export function componentToName(router, component) {
   let res = [];
   router.forEach(item => {
     if (component.hasOwnProperty(item.component)) {
-      if (typeof item.component === "string") {
-        item.component = component[item.component];
+      // introduce 如果本身设置了，就取设置值，否则取组件说明，如果引用的是main组件，就取title
+      if (item.meta && !item.meta.introduce) {
+        if (component[item.component] && component[item.component].introduce) {
+          item.meta.introduce =
+            item.component === "main"
+              ? item.meta.title
+              : component[item.component].introduce;
+        } else {
+          throw new Error(`缺少[组件|页面]介绍，组件名字为：${item.component}`);
+        }
       }
+
+      item.component = component[item.component].component;
       res.push(item);
       if (item.children && item.children.length) {
         return componentToName(item.children, component);
@@ -21,7 +31,11 @@ export function componentToName(router, component) {
       if (item.hidden) {
         res.push(item);
       } else {
-        throw new Error("缺少一个组件映射，组件名字为：" + item.component);
+        throw new Error(
+          `缺少一个组件映射，组件名字为：${item.component};功能描述为：${
+          component[item.component].introduce
+          }`
+        );
       }
     }
   });

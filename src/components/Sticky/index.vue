@@ -10,7 +10,7 @@
         height: height + 'px'
       }"
     >
-      <slot> </slot>
+      <slot />
     </div>
   </div>
 </template>
@@ -45,6 +45,8 @@ export default {
     this.height = this.$el.getBoundingClientRect().height;
     window.addEventListener("scroll", this.handleScroll);
     window.addEventListener("resize", this.handleResize);
+    //  位置本身就符合固定条件
+    this.handleScroll();
   },
   activated() {
     this.handleScroll();
@@ -79,6 +81,7 @@ export default {
       const width = this.$el.getBoundingClientRect().width;
       this.width = width || "auto";
       const offsetTop = this.$el.getBoundingClientRect().top;
+      console.log(width, offsetTop);
       if (offsetTop < this.stickyTop) {
         this.sticky();
         return;

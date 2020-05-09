@@ -5,11 +5,18 @@
 @import "./appContainer.less";
 @import "./header.less";
 @import "./nprogress.less";
+@import "./mixins.less";
+
+body {
+  .scrollbar(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3), 7px);
+}
 
 #app {
+
   // 全局配置
+  //取消全局滚动条
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
   min-height: auto;
 
   .el-scrollbar__wrap.scorllbar {
@@ -17,10 +24,11 @@
     overflow-x: hidden;
 
     // 主滚动增加宽度，让用户更加便捷点击
-    &+.el-scrollbar__bar.is-horizontal+.el-scrollbar__bar.is-vertical {
-      width: 8px;
-      right: 3px;
-    }
+    //取消全局滚动条
+    // &+.el-scrollbar__bar.is-horizontal+.el-scrollbar__bar.is-vertical {
+    //   width: 8px;
+    //   right: 3px;
+    // }
   }
 
   // 主布局配置

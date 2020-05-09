@@ -2,24 +2,13 @@ import Vue from "vue";
 import Router from "vue-router";
 import nameToComponent from "./nameToComponent";
 import { componentToName } from "@/utils/format";
-import constant from "@/router/modules/constant.static";
-import unLoginTail from "@/router/modules/unLoginTail.static";
+import heads from "@/router/modules/common/head.route";
+import unLoginTails from "@/router/modules/common/unLoginTail.route";
 import store from "@/store";
+import deepCopy from "deepcopy";
 Vue.use(Router);
-
-/**
- * add modules
- */
-
-// const modulesFiles = require.context("./modules", false, /\.static\.js$/);
-// const module = modulesFiles.keys().reduce((modules, item) => {
-//   const reg = /^\.\/(.*)\.static\.\w+$/;
-//   const name = item.replace(reg, "$1");
-//   const value = modulesFiles(item);
-//   modules[name] = value.default;
-//   return modules;
-// }, {});
-
+const head = deepCopy(heads);
+const unLoginTail = deepCopy(unLoginTails);
 const createRouter = () =>
   new Router({
     mode: "history",
@@ -29,9 +18,7 @@ const createRouter = () =>
 
 const router = new createRouter();
 if (!store.getters.token) {
-  router.addRoutes(
-    componentToName(constant.concat(unLoginTail), nameToComponent)
-  );
+  router.addRoutes(componentToName(head.concat(unLoginTail), nameToComponent));
 }
 export function addRouter(route) {
   const pushRoute = componentToName(route, nameToComponent);

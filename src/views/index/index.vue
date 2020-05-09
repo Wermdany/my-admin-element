@@ -12,6 +12,7 @@
 import { test, testOne } from "@/api/test";
 import { Button, Input } from "element-ui";
 import { alwayResolve } from "@/utils";
+import Route from "@/router/generateAllRoute";
 export default {
   name: "index",
   components: {
@@ -19,12 +20,14 @@ export default {
     elInput: Input
   },
   data() {
+    this.Route = Route;
     return {
       Input: ""
     };
   },
   created() {
     this.get();
+    console.log(this.Route);
   },
   methods: {
     get() {

@@ -1,4 +1,4 @@
-const constent = [
+const head = [
   {
     path: "/redirect-all/:path(.*)",
     component: "redirect",
@@ -24,4 +24,5 @@ const constent = [
     meta: { title: "用户登录" }
   }
 ];
-export default constent;
+Object.freeze(head[0].children);
+export default head;

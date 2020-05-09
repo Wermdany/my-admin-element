@@ -9,34 +9,32 @@
       class="sidebar-container"
       :class="{ 'has-logo': sidebarLogo }"
     ></sidebar>
-    <el-scrollbar
+    <!-- 取消全局滚动条 -->
+    <!-- <el-scrollbar
       wrap-class="scorllbar"
       :noresize="false"
       style="height: 100%;"
-    >
-      <div class="main-container" :class="{ 'has-tags-view': openTagsView }">
-        <header
-          class="header-container"
-          :class="{ 'fixed-header': fixedHeader }"
-        >
-          <navbar />
-          <tags-view v-if="openTagsView" />
-        </header>
-        <app-main />
-        <my-footer />
-      </div>
-    </el-scrollbar>
+    > -->
+    <div class="main-container" :class="{ 'has-tags-view': openTagsView }">
+      <header class="header-container" :class="{ 'fixed-header': fixedHeader }">
+        <navbar />
+        <tags-view v-if="openTagsView" />
+      </header>
+      <app-main />
+      <my-footer />
+    </div>
+    <!-- </el-scrollbar> -->
   </div>
 </template>
 <script>
 import { AppMain, TagsView, Sidebar, Navbar, Footer } from "../components/main";
 import { mapState } from "vuex";
-import { Scrollbar } from "element-ui";
+// import { Scrollbar } from "element-ui";
 import ResizeMixin from "@/layouts/mixin/ResizeHandler";
 export default {
   name: "LayOutMain",
   components: {
-    elScrollbar: Scrollbar,
+    // elScrollbar: Scrollbar,
     AppMain,
     TagsView,
     Sidebar,
@@ -66,12 +64,6 @@ export default {
         isCollapse: true,
         withoutAnimation: false
       });
-    }
-  },
-  watch: {
-    aa: {
-      handler() { },
-      deep: true
     }
   }
 };
