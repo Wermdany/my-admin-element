@@ -46,3 +46,20 @@ export function alwayResolve(promiseObj) {
     }
   });
 }
+/**
+ * 函数防抖
+ * @param {Function} fn 函数
+ * @param {Number} delay 延迟
+ * @param {Boolean} immediate 是否立即执行
+ */
+export function debounce(fn, delay, immediate) {
+  let timer = null;
+  return function () {
+    if (timer) {
+      clearTimeout(timer);
+      timer = setTimeout(fn, delay);
+    } else {
+      timer = setTimeout(fn, delay);
+    }
+  };
+}

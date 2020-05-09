@@ -1,47 +1,84 @@
 import store from "@/store";
 import { SM_WIDTH, LG_WIDTH } from "@/namespace";
 const { body } = document;
-
+import { debounce } from "@/utils";
 export default {
   watch: {
     $route() {
-      if (this.device === "mobile" && this.sidebar.opened) {
-        store.dispatch("app/closeSideBar", { withoutAnimation: false });
+      if (this.device === "SM" && this.sidebar.isCollapse) {
+        store.dispatch("app/changeSideBar", {
+          isCollapse: true,
+          withoutAnimation: false
+        });
+      }
+    },
+    device: {
+      handler(newV, oldV) {
+        this.$_Handler(newV, oldV);
       }
     }
   },
   beforeMount() {
-    window.addEventListener("resize", this.$_resizeHandler);
+    window.addEventListener("resize", debounce(this.$_resizeHandler, 100));
   },
   beforeDestroy() {
-    window.removeEventListener("resize", this.$_resizeHandler);
+    window.removeEventListener("resize", debounce(this.$_resizeHandler, 100));
   },
   mounted() {
-    const isMobile = this.$_isMobile();
-    if (isMobile) {
-      store.dispatch("app/toggleDevice", "mobile");
-      store.dispatch("app/closeSideBar", { withoutAnimation: true });
-    }
+    const state = this.$_getNowState();
+    store.dispatch("app/changeDevice", state);
+    this.$_Handler(state, undefined);
   },
   methods: {
-    // use $_ for mixins properties
-    // https://vuejs.org/v2/style-guide/index.html#Private-property-names-essential
-    $_isMobile() {
-      const rect = body.getBoundingClientRect();
-      console.log(rect);
-      return rect.width - 1 < SM_WIDTH;
+    $_Handler(newV, oldV) {
+      if (newV === "SM") {
+        store.dispatch("app/changeSideBar", {
+          isCollapse: true,
+          withoutAnimation: true
+        });
+      }
+      if (newV === "MD") {
+        if (oldV === undefined) {
+          //解决刷新中等尺寸下动画效果Bug
+          store.dispatch("app/changeSideBar", {
+            isCollapse: true,
+            withoutAnimation: true
+          });
+        }
+        if (oldV === "SM") {
+          store.dispatch("app/changeSideBar", {
+            withoutAnimation: true,
+            isCollapse: true
+          });
+        } else {
+          store.dispatch("app/changeSideBar", {
+            isCollapse: true,
+            withoutAnimation: false
+          });
+        }
+      }
+      if (newV === "LG") {
+        store.dispatch("app/changeSideBar", {
+          isCollapse: false,
+          withoutAnimation: false
+        });
+      }
     },
-    $_getNowState() { 
-      
+    $_getNowState() {
+      const rect = body.getBoundingClientRect().width - 1;
+      if (rect < SM_WIDTH) {
+        return "SM";
+      }
+      if (rect >= SM_WIDTH && rect < LG_WIDTH) {
+        return "MD";
+      }
+      if (rect >= LG_WIDTH) {
+        return "LG";
+      }
     },
     $_resizeHandler() {
       if (!document.hidden) {
-        const isMobile = this.$_isMobile();
-        store.dispatch("app/toggleDevice", isMobile ? "mobile" : "desktop");
-
-        if (isMobile) {
-          store.dispatch("app/closeSideBar", { withoutAnimation: true });
-        }
+        store.dispatch("app/changeDevice", this.$_getNowState());
       }
     }
   }

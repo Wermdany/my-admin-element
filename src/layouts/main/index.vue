@@ -1,7 +1,7 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <div
-      v-if="device === 'mobile' && !sidebar.isCollapse"
+      v-if="device === 'SM' && !sidebar.isCollapse"
       class="drawer-bg"
       @click="handleClickOutside"
     />
@@ -56,13 +56,22 @@ export default {
       return {
         "hidden-sidebar": this.sidebar.isCollapse,
         withoutAnimation: this.sidebar.withoutAnimation,
-        mobile: this.device === "mobile"
+        mobile: this.device === "SM"
       };
     }
   },
   methods: {
     handleClickOutside() {
-      this.$store.dispatch("app/closeSideBar", { withoutAnimation: false });
+      this.$store.dispatch("app/changeSideBar", {
+        isCollapse: true,
+        withoutAnimation: false
+      });
+    }
+  },
+  watch: {
+    aa: {
+      handler() { },
+      deep: true
     }
   }
 };

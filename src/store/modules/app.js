@@ -13,13 +13,13 @@ import { getStorageNullToDefault } from "@/utils/defaultVar";
 const state = {
   // 侧边栏
   sidebar: {
-    // 是否缩进
+    // 是否缩进,现在页面总是根据尺寸进行缩放
     isCollapse: getStorageNullToDefault(IS_COLLAPSE),
     // 是否开启动画,解决页面缩放或者不同尺寸下动画闪烁问题
-    withoutAnimation: false
+    withoutAnimation: true
   },
   // 当前视窗大小
-  device: "desktop",
+  device: "LG",
   // 全局组件大小
   size: getStorageNullToDefault(UI_SIZE),
   // 是否显示logo
@@ -32,15 +32,15 @@ const state = {
   pageLoading: true
 };
 const mutations = {
-  TOGGLE_SIDEBAR: (state, status) => {
+  TOGGLE_SIDEBAR: state => {
     state.sidebar.withoutAnimation = false;
-    if (status === undefined) {
-      Storage.set(IS_COLLAPSE, !state.sidebar.isCollapse);
-      state.sidebar.isCollapse = !state.sidebar.isCollapse;
-    } else {
-      Storage.set(IS_COLLAPSE, status);
-      state.sidebar.isCollapse = status;
-    }
+    Storage.set(IS_COLLAPSE, !state.sidebar.isCollapse);
+    state.sidebar.isCollapse = !state.sidebar.isCollapse;
+  },
+  CHANGE_SIDEBAR: (state, { isCollapse, withoutAnimation }) => {
+    state.sidebar.withoutAnimation = withoutAnimation;
+    Storage.set(IS_COLLAPSE, isCollapse);
+    state.sidebar.isCollapse = isCollapse;
   },
   TOGGLE_FIXED_HEADER: state => {
     Storage.set(FIXED_HEADER, !state.fixedHeader);
@@ -61,18 +61,13 @@ const mutations = {
   TOGGLE_PAGE_LOADING: (state, data) => {
     state.pageLoading = data;
   },
-  CLOSE_SIDEBAR: (state, withoutAnimation) => {
-    state.sidebar.withoutAnimation = withoutAnimation;
-    Storage.set(IS_COLLAPSE, true);
-    state.sidebar.isCollapse = true;
-  },
-  TOGGLE_DEVICE: (state, device) => {
+  CHANGE_DEVICE: (state, device) => {
     state.device = device;
   }
 };
 const actions = {
-  toggleSideBar({ commit }, status) {
-    commit("TOGGLE_SIDEBAR", status);
+  toggleSideBar({ commit }) {
+    commit("TOGGLE_SIDEBAR");
   },
   toggleFixedHeader({ commit }) {
     commit("TOGGLE_FIXED_HEADER");
@@ -89,11 +84,11 @@ const actions = {
   setSize({ commit }, size) {
     commit("SET_SIZE", size);
   },
-  closeSideBar({ commit }, { withoutAnimation }) {
-    commit("CLOSE_SIDEBAR", withoutAnimation);
+  changeSideBar: ({ commit }, state) => {
+    commit("CHANGE_SIDEBAR", state);
   },
-  toggleDevice({ commit }, device) {
-    commit("TOGGLE_DEVICE", device);
+  changeDevice({ commit }, device) {
+    commit("CHANGE_DEVICE", device);
   }
 };
 export default {

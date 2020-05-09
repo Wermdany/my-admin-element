@@ -3,7 +3,7 @@
     <hamburger @toggleClick="toggleClick" :is-collapse="sidebar" />
     <breadcrumb />
     <div class="nav-menu--right">
-      <template v-if="device !== 'mobile'">
+      <template v-if="device !== 'SM'">
         <header-search />
         <size-selete />
         <setting />
