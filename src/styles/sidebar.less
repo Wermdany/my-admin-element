@@ -73,24 +73,35 @@
   .el-menu {
 
     //选中的时候
-    .el-submenu.is-active {
+    .el-submenu {
 
-      //submenu 颜色恒定
-      .el-submenu__title,
-      .el-submenu__title i {
-        color: @subMenuActiveText  !important;
-        background: none !important;
+      &.is-active {
+
+        //submenu 颜色恒定
+        .el-submenu__title,
+        .el-submenu__title i {
+          color: @subMenuActiveText  !important;
+        }
+
+        //修改 展开 item color
+        .el-submenu__title+.el-menu.el-menu--inline,
+        .el-submenu__title+.el-menu.el-menu--inline .el-menu-item {
+          background: @subMenuBg  !important;
+
+          //选中的时候
+          &.is-active {
+            color: @menuActiveText  !important;
+            background: @menuActiveBg  !important;
+          }
+        }
       }
 
-      //修改 展开 item color
-      .el-submenu__title+.el-menu.el-menu--inline,
-      .el-submenu__title+.el-menu.el-menu--inline .el-menu-item {
-        background: @subMenuBg  !important;
+      &.is-opened {
 
-        //选中的时候
-        &.is-active {
-          color: @menuActiveText  !important;
-          background: @menuActiveBg  !important;
+        //修改 展开 item color
+        .el-submenu__title+.el-menu.el-menu--inline,
+        .el-submenu__title+.el-menu.el-menu--inline .el-menu-item {
+          background: @subMenuBg  !important;
         }
       }
 
@@ -136,7 +147,7 @@
       width: 100%;
       top: 0;
       height: 100%;
-      position: absolute;
+      position: fixed;
       z-index: 999;
     }
 
@@ -169,6 +180,7 @@
 
   .withoutAnimation {
 
+    .logo-container,
     .header-container,
     .main-container,
     .sidebar-container {

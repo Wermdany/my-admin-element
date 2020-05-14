@@ -29,6 +29,7 @@
         <tips
           trigger="hover"
           placement="top"
+          style="padding: 0 5px;"
           content="把您的信息保存到本地，带来便捷的同时会有一定的风险！"
         />
       </el-form-item>
@@ -196,7 +197,7 @@ export default {
 }
 .login-contianer {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background: @menuBg;
   /deep/.el-form {
     width: 480px;

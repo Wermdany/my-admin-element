@@ -3,13 +3,19 @@ const tail = [
     path: "/404",
     component: "page404",
     hidden: true,
-    name: "404"
+    name: "page404",
+    meta: {
+      title: "页面404错误"
+    }
   },
   {
     path: "*",
     redirect: "/404",
-    hidden: true
+    hidden: true,
+    name: "intercept",
+    meta: {
+      title: "全局路由拦截"
+    }
   }
 ];
-Object.freeze(tail);
 export default tail;

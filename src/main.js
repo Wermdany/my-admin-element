@@ -5,11 +5,10 @@ import store from "@/store";
 import "@/router/before";
 import "@/styles/index.less";
 Vue.config.productionTip = false;
-import { Message } from "element-ui";
-import { UI_SIZE } from "@/namespace";
-import { getStorageNullToDefault } from "@/utils/defaultVar";
-Vue.prototype.$message = Message;
-Vue.prototype.$ELEMENT = { size: getStorageNullToDefault(UI_SIZE) };
+import deepCopy from "deepcopy";
+import "@/element";
+//注入一个深拷贝方法
+Vue.prototype.$deepCopy = deepCopy;
 new Vue({
   router,
   store,

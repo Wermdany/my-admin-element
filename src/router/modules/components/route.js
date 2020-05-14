@@ -22,5 +22,4 @@ const components = [
   }
 ];
 
-Object.freeze(components);
 export default components;

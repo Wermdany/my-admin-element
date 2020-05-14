@@ -15,6 +15,7 @@
     "deepcopy": "^2.0.0",
     "element-ui": "^2.13.0",
     "fuse.js": "^5.2.3",
+    "lodash-es": "^4.17.15",
     "nprogress": "^0.2.0",
     "path-to-regexp": "2.4.0",
     "vue": "^2.6.10",

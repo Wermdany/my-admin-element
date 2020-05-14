@@ -1,5 +1,6 @@
 <template>
   <el-tooltip v-bind="$attrs">
+    <div v-if="htmlContent" slot="content" v-html="htmlContent"></div>
     <i :class="className" :style="styles"></i>
   </el-tooltip>
 </template>
@@ -10,6 +11,10 @@ export default {
   props: {
     icon: {
       default: "warning",
+      type: String
+    },
+    htmlContent: {
+      default: "",
       type: String
     }
   },
@@ -22,7 +27,6 @@ export default {
     },
     styles() {
       return {
-        padding: "0 5px",
         cursor: "pointer",
         color: "inherit"
       };

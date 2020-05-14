@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <hamburger @toggleClick="toggleClick" :is-collapse="sidebar" />
-    <breadcrumb />
+    <breadcrumb v-if="device !== 'SM'" />
     <div class="nav-menu--right">
       <template v-if="device !== 'SM'">
         <header-search />

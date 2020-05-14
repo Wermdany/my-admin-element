@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { Menu, Scrollbar, Tooltip } from "element-ui";
+import { Menu, Scrollbar } from "element-ui";
 import SidebarItem from "./SidebarItem";
 import Logo from "@/layouts/components/Logo";
 import setting from "@/styles/variables.less";
@@ -35,8 +35,6 @@ export default {
     elMenu: Menu,
     elScrollbar: Scrollbar,
     SidebarItem,
-    // eslint-disable-next-line vue/no-unused-components
-    elTooltip: Tooltip,
     Logo
   },
   computed: {

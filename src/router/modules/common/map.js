@@ -8,15 +8,15 @@ export default {
     introduce: "系统整体布局组件"
   },
   redirect: {
-    component: () => import("@/views/redirect/index"),
+    component: () => import("@/views/redirect"),
     introduce: "系统整体重定向辅助页面"
   },
   index: {
-    component: () => import("@/views/index/index"),
+    component: () => import("@/views/index"),
     introduce: "系统整体测试主页"
   },
   login: {
-    component: () => import("@/views/login/index"),
+    component: () => import("@/views/login"),
     introduce: "系统整体登陆页面"
   },
   page404: {

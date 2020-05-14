@@ -3,12 +3,23 @@ import Router from "vue-router";
 import nameToComponent from "./nameToComponent";
 import { componentToName } from "@/utils/format";
 import heads from "@/router/modules/common/head.route";
-import unLoginTails from "@/router/modules/common/unLoginTail.route";
+import { OPEN_ROUTE_MODULE_NAME } from "@/namespace";
+import { formatComponentName } from "@/utils/format";
 import store from "@/store";
 import deepCopy from "deepcopy";
 Vue.use(Router);
-const head = deepCopy(heads);
-const unLoginTail = deepCopy(unLoginTails);
+
+let head = deepCopy(heads);
+if (OPEN_ROUTE_MODULE_NAME) {
+  head = formatComponentName(head, "common");
+}
+//未匹配到页面全部重定向至登陆页面
+const unLoginTail = {
+  path: "*",
+  redirect: "/login",
+  hidden: true
+};
+
 const createRouter = () =>
   new Router({
     mode: "history",

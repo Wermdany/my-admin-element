@@ -9,6 +9,7 @@
         ref="tag"
         :class="isActive(tag) ? 'active' : ''"
         class="tags-view-item"
+        :title="tag.meta.introduce"
         @click.middle.native="!isAffix(tag) ? closeSelectedTag(tag) : ''"
         @contextmenu.prevent.native="openMenu(tag, $event)"
       >

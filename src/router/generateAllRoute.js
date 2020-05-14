@@ -3,18 +3,22 @@
  */
 
 import { OPEN_ROUTE_MODULE_NAME } from "@/namespace";
-
-const RegExp = /\/([a-z]+)\/route\.js$/;
+import { formatComponentName } from "@/utils/format";
+const RegExp = /\.\/([a-z]+)[\\/a-zA-Z\\.]*\.js$/;
 
 const RouteFiles = require.context("./modules", true, /route\.js$/);
 
 const Route = RouteFiles.keys().reduce((data, item) => {
+  const parent = item.replace(RegExp, "$1");
   const value = RouteFiles(item).default;
   if (OPEN_ROUTE_MODULE_NAME) {
-    const parent = item.replace(RegExp, "$1");
+    var ModuleValue = formatComponentName(value, parent);
   }
-  data = data.concat(value);
+  if (data.hasOwnProperty(parent)) {
+    data[parent] = data[parent].concat(ModuleValue || value);
+  } else {
+    data[parent] = ModuleValue || value;
+  }
   return data;
-}, []);
-
+}, {});
 export default Route;

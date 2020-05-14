@@ -1,16 +1,27 @@
 import heads from "@/router/modules/common/head.route";
 import loginTails from "@/router/modules/common/loginTail.route";
-import unLoginTails from "@/router/modules/common/unLoginTail.route";
+import { OPEN_ROUTE_MODULE_NAME } from "@/namespace";
+import { formatComponentName } from "@/utils/format";
 import { userRules } from "@/api/user";
 import { HTTP_PASS } from "@/namespace";
 import { resetRouter, addRouter } from "@/router";
+import { delExternalRoute } from "@/utils/format";
 import path from "path";
 import deepCopy from "deepcopy";
 //深拷贝，防止浅拷贝下 其他属性也被Vue劫持
-const head = deepCopy(heads);
-const loginTail = deepCopy(loginTails);
-const unLoginTail = deepCopy(unLoginTails);
 
+let head = deepCopy(heads);
+let loginTail = deepCopy(loginTails);
+if (OPEN_ROUTE_MODULE_NAME) {
+  head = formatComponentName(head, "common");
+  loginTail = formatComponentName(loginTail, "common");
+}
+//未匹配到页面全部重定向至登陆页面
+const unLoginTail = {
+  path: "*",
+  redirect: "/login",
+  hidden: true
+};
 function addDefaultRedirect(route) {
   if (!Array.isArray(route)) {
     throw new Error("路由必须是一个数组！");
@@ -50,11 +61,11 @@ const mutations = {
   SET_ROUTERS: (state, addRoutes) => {
     const add = addDefaultRedirect(addRoutes);
     const all = head.concat(addRoutes, loginTail);
-    resetRouter();
-    addRouter(all);
     state.firstRedirect = add[0];
     state.addRoutes = add;
     state.routes = all;
+    resetRouter();
+    addRouter(delExternalRoute(all));
   },
   RESET_ROUTERS: state => {
     const all = head.concat(unLoginTail);

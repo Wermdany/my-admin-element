@@ -73,4 +73,4 @@ export const LG_WIDTH = 1120;
  *  superAdmin/index => superAdmin_index
  *  admin/index  => admin_index
  */
-export const OPEN_ROUTE_MODULE_NAME = false;
+export const OPEN_ROUTE_MODULE_NAME = true;

@@ -25,5 +25,4 @@ const MapFilesData = MapFiles.keys().reduce((data, item) => {
   Object.assign(data, value);
   return data;
 }, {});
-console.log(MapFilesData);
 export default MapFilesData;

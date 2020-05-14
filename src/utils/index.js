@@ -64,7 +64,14 @@ export function debounce(fn, delay, immediate) {
     }
   };
 }
-export function deepCopyRoute(route) {
+/**
+ *
+ *
+ * @export
+ * @param {*} route
+ * @returns
+ */
+export function deepCopy(route) {
   if (!Array.isArray(route))
     throw new Error("类型错误：传入的路由表不是一个数组");
   let res = [];
