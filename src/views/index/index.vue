@@ -1,52 +1,37 @@
 <template>
   <ul class="main">
-    <el-input v-model="Input"></el-input>
-    <el-button @click="get" type="primary">请求1</el-button>
+    <el-button @click="get" type="primary">请求</el-button>
     <el-button @click="cancel" type="danger">取消请求</el-button>
-    <li v-for="i in 100" :key="i">
-      {{ i }}
-    </li>
+    <once-popconfirm ref="popconfirm"></once-popconfirm>
+    <el-button v-popconfirm:popconfirm>111</el-button>
   </ul>
 </template>
 <script>
 import { test, testOne } from "@/api/test";
-import { Button, Input } from "element-ui";
+import { Button } from "element-ui";
 import { alwayResolve } from "@/utils";
-import Route from "@/router/generateAllRoute";
+import OncePopconfirm from "@/components/OncePopconfirm";
 export default {
   name: "index",
   components: {
     elButton: Button,
-    elInput: Input
+    OncePopconfirm
   },
   data() {
-    this.Route = Route;
-    return {
-      Input: ""
-    };
+    return {};
   },
-  created() {
-    this.get();
-    console.log(this.Route);
-  },
+  created() {},
   methods: {
     get() {
-      // alwayResolve({
-      //   test: test,
-      //   testOne: testOne
-      // })
-      //   .then(res => {
-      //     console.log(res);
-      //   })
-      //   .catch(res => {
-      //     console.log(res);
-      //   });
-      testOne()
+      alwayResolve({
+        test: test,
+        testOne: testOne
+      })
         .then(res => {
           console.log(res);
         })
-        .catch(err => {
-          console.log(err);
+        .catch(res => {
+          console.log(res);
         });
     },
     cancel() {

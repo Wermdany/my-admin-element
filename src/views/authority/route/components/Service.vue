@@ -12,27 +12,47 @@
       >
       <el-button
         type="danger"
-        title="重置服务器路由设置，也就是清空服务器所有保存路由数据 "
+        title="重置服务器路由设置，也就是清空服务器所有保存路由数据"
         @click="resetService"
         >重置</el-button
       >
+      <el-button
+        type="success"
+        title="把当前页面修改都保存至服务器"
+        @click="saveAll"
+        >保存</el-button
+      >
     </div>
-    <route-tree :data="defaultAllRoutes" use-type="edit" />
-    <el-dialog :visible.sync="visible" :show-close="false" center>
-      <div slot="title">{{ title }}</div>
+    <route-tree
+      ref="RouteTree"
+      :data="defaultAllRoutes"
+      use-type="edit"
+      :draggable="true"
+      @get-node="getRoute"
+      @node-drop="RouteDrop"
+    />
+    <el-dialog :visible.sync="dialog_visible" :show-close="false" center>
+      <div slot="title">{{ dialog_title | EventFormat(event) }}</div>
       <div class="body">
-        <route-form :disabled="false" :model.sync="formModel" />
+        <route-form :disabled="false" :model.sync="formRoute" />
       </div>
+      <span slot="footer" class="footer">
+        <el-button @click="dialog_visible = false">取 消</el-button>
+        <el-button type="primary" @click="saveRoute">确 定</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
 <script>
-import { Alert, Button, Dialog } from "element-ui";
+import { Alert, Dialog, Button } from "element-ui";
 import RouteTree from "./RouteTree";
 import RouteForm from "./RouteForm";
 import defaultAllRoutes from "@/router/generateAllRoute";
-import defaultRouteVal from "@/router/itemFormat";
-import { formatModulesToAll } from "./util";
+import { formatModulesToAll, pythonTitle } from "./util";
+import DialogMixins from "@/mixins/dialog";
+import ServiceMixins from "./mixins/Service";
+import ServiceHttpMixins from "./mixins/ServiceHttp";
+
 export default {
   name: "AuthorityRouteService",
   components: {
@@ -43,15 +63,78 @@ export default {
     RouteForm
   },
   data() {
-    this.defaultRouteVal = this.$deepCopy(defaultRouteVal);
+    this.eventType = [
+      "Cat",
+      "Edit",
+      "Delete",
+      "Append",
+      "InsertAfter",
+      "InsertBefore",
+      "Drop"
+    ];
     return {
       defaultAllRoutes: formatModulesToAll(this.$deepCopy(defaultAllRoutes)),
       visible: false,
       title: "",
-      formModel: {}
+      // 当前正在编辑的 route
+      formRoute: {},
+      // 选择中的 route
+      selectRoute: {},
+      event: ""
     };
   },
+  mixins: [DialogMixins, ServiceMixins, ServiceHttpMixins],
   methods: {
+    // 编辑 route
+    getRoute(data, node, type) {
+      this.dispenseEvent(data, node, type);
+    },
+    //分发事件
+    dispenseEvent(data, node, type) {
+      if (type > this.eventType.length)
+        throw new Error("[Route tree]:未知的修改事件！");
+      this["$_E_" + this.eventType[type]](data, node, type);
+      if (type != 2) {
+        this.beginEdit(data, node);
+        return;
+      }
+      this.backEvent();
+    },
+    //开始编辑
+    beginEdit(data, node) {
+      this.$_setDialogTitle(pythonTitle(node));
+      this.$_openDialog();
+    },
+    backEvent() {
+      this["$_H_" + this.eventType[this.event]](
+        this.selectRoute,
+        this.formRoute
+      )
+        .then(() => {
+          this.$refs.RouteTree.receiveEvent(
+            this.selectRoute,
+            this.formRoute,
+            this.eventType[this.event],
+            this.defaultAllRoutes
+          );
+        })
+        .catch(err => {
+          this.$message.error(err);
+        });
+    },
+    RouteDrop(selectNode, selfNode, location, type) {
+      this.$_E_Drop(selectNode, selfNode, location).then(() => {
+        this.$message.success("拖拽成功！");
+      });
+    },
+    // 保存修改
+    saveRoute() {
+      this.backEvent();
+      this.$_closeDialog();
+    },
+    saveAll() {
+      //一次性保存所有节点方法
+    },
     resetService() {
       const h = this.$createElement;
       this.$prompt("", {
@@ -70,6 +153,19 @@ export default {
         .catch(() => {
           this.$message.warning("重置取消...");
         });
+    }
+  },
+  filters: {
+    EventFormat(v, event) {
+      const word = [
+        "查看",
+        "编辑",
+        "删除",
+        "内部插入新路由",
+        "前置插入新路由",
+        "后置插入新路由"
+      ];
+      return `[ ${v} ] ${word[event]}`;
     }
   }
 };

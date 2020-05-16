@@ -28,9 +28,9 @@
         </el-option>
       </el-select>
     </div>
-    <route-tree :data="showRoutes" @catDetail="catDetail" />
-    <el-dialog :visible.sync="visible" :show-close="false" center>
-      <div slot="title">{{ title }}</div>
+    <route-tree :data="showRoutes" @get-node="catRoute" />
+    <el-dialog :visible.sync="dialog_visible" :show-close="false" center>
+      <div slot="title">{{ dialog_title }}</div>
       <div class="body">
         <route-form :disabled="true" :model.sync="formModel" />
       </div>
@@ -52,6 +52,7 @@ import {
 } from "element-ui";
 import RouteForm from "../components/RouteForm";
 import { pythonTitle, formatModulesToAll } from "./util";
+import dialogMixins from "@/mixins/dialog";
 export default {
   name: "AuthorityRouteDefault",
   components: {
@@ -64,6 +65,7 @@ export default {
     RouteForm,
     RouteTree
   },
+  mixins: [dialogMixins],
   data() {
     this.radioButton = [
       {
@@ -82,10 +84,7 @@ export default {
       catType: "all",
       // 按模块查看的查看模块名
       modulesSelected: "",
-      // 弹出框是否可见
-      visible: false,
-      formModel: {},
-      title: ""
+      formModel: {}
     };
   },
   computed: {
@@ -106,14 +105,11 @@ export default {
   },
 
   methods: {
-    catDetail(data, node) {
-      this.visible = true;
+    catRoute(data, node) {
+      this.dialog_visible = true;
       //合并默认属性
-      this.formModel = merge(
-        this.$deepCopy(defaultRouteConfig),
-        this.$deepCopy(data)
-      );
-      this.title = pythonTitle(node);
+      this.formModel = merge(this.$deepCopy(defaultRouteConfig), data);
+      this.dialog_title = pythonTitle(node);
     }
   }
 };

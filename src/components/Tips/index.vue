@@ -8,6 +8,7 @@
 import { Tooltip } from "element-ui";
 export default {
   name: "Tips",
+  inheritAttrs: false,
   props: {
     icon: {
       default: "warning",

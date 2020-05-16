@@ -188,17 +188,20 @@ export default {
     this.rules = {
       "meta.title": [
         {
-          required: true
+          required: true,
+          trigger: "blur"
         }
       ],
       path: [
         {
-          required: true
+          required: true,
+          trigger: "blur"
         }
       ],
       name: [
         {
-          required: true
+          required: true,
+          trigger: "blur"
         }
       ]
     };

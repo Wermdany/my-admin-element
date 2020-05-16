@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import { Menu, Scrollbar } from "element-ui";
+import { Menu, Scrollbar, Tooltip } from "element-ui";
 import SidebarItem from "./SidebarItem";
 import Logo from "@/layouts/components/Logo";
 import setting from "@/styles/variables.less";
@@ -34,6 +34,8 @@ export default {
   components: {
     elMenu: Menu,
     elScrollbar: Scrollbar,
+    // see: https://github.com/ElemeFE/element/pull/19416
+    elTooltip: Tooltip,
     SidebarItem,
     Logo
   },
