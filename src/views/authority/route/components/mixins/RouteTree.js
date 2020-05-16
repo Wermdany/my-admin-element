@@ -30,8 +30,11 @@ export default {
      * @param {Object} children 增加节点的 data
      * @param {Object} parent 被增加节点的 data
      */
-    $_nodeAppend(parent, children) {
-      this.$refs.Tree.append(children, parent);
+    $_nodeAppend(parent, children, all) {
+      if (Object.keys(parent) && Object.keys(children)) {
+        this.$refs.Tree.append(children, parent);
+      }
+      all.push(children);
     },
     /**
      * 在前插入一个节点

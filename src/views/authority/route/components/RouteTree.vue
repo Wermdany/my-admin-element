@@ -14,6 +14,7 @@
       highlight-current
       :filter-node-method="filterRoutes"
       @node-drop="nodeDrop"
+      @getNode="getTreeNode"
       ref="Tree"
     >
       <template slot-scope="{ data, node }">
@@ -141,6 +142,9 @@ export default {
       if (type) {
         this["$_node" + type](formNode, selectNode, all);
       }
+    },
+    getTreeNode(data) {
+      return this.$refs.Tree.getNode(data);
     }
   },
   filters: {

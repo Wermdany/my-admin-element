@@ -6,6 +6,7 @@
  * @returns {String}
  */
 export function pythonTitle(Node) {
+  if (!Node) return "根节点";
   let res = Node.data.meta.title;
   if (Node.level < 2) {
     return `${res}`;

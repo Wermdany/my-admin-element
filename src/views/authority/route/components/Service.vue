@@ -4,7 +4,10 @@
       >服务器设置，主要是把本地的默认路由设置，保存至服务器端，同时可以对路由节点进行任意的修改和删除，支持拖拽排序；<br />第一次启用此功能一般是初始化服务器设置，全部保存至服务器，然后再此基础上进行修改；<br />如果对本系统充分了解可以直接从零编写路由，但是必须是合法的配置，并且匹配组件映射；<br />路由修改支持两种方式和服务器保持一直：<br />1.全部修改后整体保存至服务器<br />2.每次修改任意一个节点都实时保存至服务器<br />目前以默认数据模拟</el-alert
     >
     <div class="header">
-      <el-button type="primary" title="向根部末尾添加一个路由节点"
+      <el-button
+        type="primary"
+        title="向根部末尾添加一个路由节点"
+        @click="addRootRoute"
         >新增</el-button
       >
       <el-button type="success" title="把本地默认路由设置保持至服务器"
@@ -122,6 +125,17 @@ export default {
           this.$message.error(err);
         });
     },
+    addRootRoute() {
+      const lastRoute = this.defaultAllRoutes[this.defaultAllRoutes.length - 1];
+      if (lastRoute) {
+        const lastNode = this.$refs.RouteTree.getTreeNode(lastRoute);
+        this.$_E_InsertAfter(lastRoute, lastNode, 4);
+        this.beginEdit(lastRoute, lastNode);
+      } else {
+        this.$_E_Append({}, {}, 3);
+        this.beginEdit(null, null);
+      }
+    },
     RouteDrop(selectNode, selfNode, location, type) {
       this.$_E_Drop(selectNode, selfNode, location).then(() => {
         this.$message.success("拖拽成功！");
@@ -148,7 +162,7 @@ export default {
         inputErrorMessage: "请输入“确认重置”完成操作"
       })
         .then(() => {
-          this.$message.success("重置操作...");
+          this.defaultAllRoutes = [];
         })
         .catch(() => {
           this.$message.warning("重置取消...");
@@ -162,8 +176,8 @@ export default {
         "编辑",
         "删除",
         "内部插入新路由",
-        "前置插入新路由",
-        "后置插入新路由"
+        "后置插入新路由",
+        "前置插入新路由"
       ];
       return `[ ${v} ] ${word[event]}`;
     }
