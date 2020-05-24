@@ -9,7 +9,7 @@
   </ul>
 </template>
 <script>
-import Sticky from "@/components/Sticky/index.vue";
+import Sticky from "@/components/Sticky";
 export default {
   name: "componentsSticky",
   components: {

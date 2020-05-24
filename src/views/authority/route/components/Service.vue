@@ -34,7 +34,12 @@
       @get-node="getRoute"
       @node-drop="RouteDrop"
     />
-    <el-dialog :visible.sync="dialog_visible" :show-close="false" center>
+    <el-dialog
+      :visible.sync="dialog_visible"
+      :show-close="false"
+      center
+      destroy-on-close
+    >
       <div slot="title">{{ dialog_title | EventFormat(event) }}</div>
       <div class="body">
         <route-form :disabled="false" :model.sync="formRoute" />

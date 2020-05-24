@@ -29,7 +29,12 @@
       </el-select>
     </div>
     <route-tree :data="showRoutes" @get-node="catRoute" />
-    <el-dialog :visible.sync="dialog_visible" :show-close="false" center>
+    <el-dialog
+      :visible.sync="dialog_visible"
+      :show-close="false"
+      center
+      destroy-on-close
+    >
       <div slot="title">{{ dialog_title }}</div>
       <div class="body">
         <route-form :disabled="true" :model.sync="formModel" />

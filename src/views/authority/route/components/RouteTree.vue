@@ -26,7 +26,7 @@
             ></i
             >{{ data.meta.title }}</span
           >
-          <template v-if="useType === 'cat'">
+          <template v-if="useType === 'cat' || useType === 'select'">
             <i
               class="el-icon-view tree-item--cat"
               :title="'查看[$]详细' | format(data)"

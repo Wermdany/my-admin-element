@@ -1,26 +1,26 @@
-const components = [
+const form = [
   {
-    path: "/components",
-    name: "components",
-    redirect: "/components/sticky",
+    path: "/form",
+    name: "form",
+    redirect: "/form/base-form",
     component: "main",
     meta: {
-      icon: "open",
-      title: "内置组件"
+      icon: "document",
+      title: "表单"
     },
     children: [
       {
-        path: "sticky",
-        name: "sticky",
-        component: "sticky",
+        path: "base-form",
+        name: "formBaseForm",
+        component: "baseForm",
         meta: {
           icon: "",
-          title: "黏着组件"
+          title: "基础表单"
         }
       },
       {
         path: "step-form",
-        name: "componentsStepForm",
+        name: "formStepForm",
         component: "stepForm",
         meta: {
           icon: "",
@@ -33,4 +33,4 @@ const components = [
   }
 ];
 
-export default components;
+export default form;

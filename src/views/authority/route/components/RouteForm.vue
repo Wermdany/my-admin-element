@@ -89,66 +89,73 @@
       /></span>
       <el-input v-model="model.meta.introduce" type="textarea"></el-input>
     </el-form-item>
-    <el-form-item :label-width="labelWidth" prop="meta.cache">
-      <span slot="label" style="text-transform:capitalize;"
-        >cache
-        <tips
-          placement="top"
-          html-content="离开此页面是否缓存，不填写默认缓存页面<br/>只有在最底层才有效，如果一些页面不需要缓存，为提高性能应该设置它"
-      /></span>
-      <el-select v-model="model.meta.cache">
-        <el-option label="缓存" :value="true"></el-option>
-        <el-option label="销毁" :value="false"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item :label-width="labelWidth" prop="hidden">
-      <span slot="label" style="text-transform:capitalize;"
-        >hidden
-        <tips
-          placement="top"
-          html-content="此页面是否在侧边栏隐藏，不填写默认不隐藏<br/>如果一些页面不需要在侧边栏显示，可以设置它"
-      /></span>
-      <el-select v-model="model.hidden">
-        <el-option label="隐藏" :value="true"></el-option>
-        <el-option label="显示" :value="false"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item :label-width="labelWidth" prop="alwaysShow">
-      <span slot="label" style="text-transform:capitalize;"
-        >alwaysShow
-        <tips
-          placement="top"
-          html-content="此页面是在侧边栏的渲染模式，只有在嵌套路由下，子路由只有一个的情况下才生效"
-      /></span>
-      <el-select v-model="model.alwaysShow">
-        <el-option label="始终渲染父路由" :value="true"></el-option>
-        <el-option label="只渲染子路由" :value="false"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item :label-width="labelWidth" prop="meta.breadcrumb">
-      <span slot="label" style="text-transform:capitalize;"
-        >breadcrumb
-        <tips
-          placement="top"
-          html-content="此页面是否在面包屑显示，不填写默认显示<br/>如果一些页面不需要在面包屑显示，可以设置它"
-      /></span>
-      <el-select v-model="model.meta.breadcrumb">
-        <el-option label="显示" :value="true"></el-option>
-        <el-option label="隐藏" :value="false"></el-option>
-      </el-select>
-    </el-form-item>
-    <el-form-item :label-width="labelWidth" prop="meta.affix">
-      <span slot="label" style="text-transform:capitalize;"
-        >affix
-        <tips
-          placement="top"
-          html-content="此页面是否在标签页固定，固定下无法关闭，默认不固定"
-      /></span>
-      <el-select v-model="model.meta.affix">
-        <el-option label="固定" :value="true"></el-option>
-        <el-option label="不固定" :value="false"></el-option>
-      </el-select>
-    </el-form-item>
+    <template v-if="!showOtherConfig"
+      ><div class="other-config" @click="showOtherConfigFun">
+        显示其他设置
+      </div></template
+    >
+    <template v-if="showOtherConfig">
+      <el-form-item :label-width="labelWidth" prop="meta.cache">
+        <span slot="label" style="text-transform:capitalize;"
+          >cache
+          <tips
+            placement="top"
+            html-content="离开此页面是否缓存，不填写默认缓存页面<br/>只有在最底层才有效，如果一些页面不需要缓存，为提高性能应该设置它"
+        /></span>
+        <el-select v-model="model.meta.cache">
+          <el-option label="缓存" :value="true"></el-option>
+          <el-option label="销毁" :value="false"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item :label-width="labelWidth" prop="hidden">
+        <span slot="label" style="text-transform:capitalize;"
+          >hidden
+          <tips
+            placement="top"
+            html-content="此页面是否在侧边栏隐藏，不填写默认不隐藏<br/>如果一些页面不需要在侧边栏显示，可以设置它"
+        /></span>
+        <el-select v-model="model.hidden">
+          <el-option label="隐藏" :value="true"></el-option>
+          <el-option label="显示" :value="false"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item :label-width="labelWidth" prop="alwaysShow">
+        <span slot="label" style="text-transform:capitalize;"
+          >alwaysShow
+          <tips
+            placement="top"
+            html-content="此页面是在侧边栏的渲染模式，只有在嵌套路由下，子路由只有一个的情况下才生效"
+        /></span>
+        <el-select v-model="model.alwaysShow">
+          <el-option label="始终渲染父路由" :value="true"></el-option>
+          <el-option label="只渲染子路由" :value="false"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item :label-width="labelWidth" prop="meta.breadcrumb">
+        <span slot="label" style="text-transform:capitalize;"
+          >breadcrumb
+          <tips
+            placement="top"
+            html-content="此页面是否在面包屑显示，不填写默认显示<br/>如果一些页面不需要在面包屑显示，可以设置它"
+        /></span>
+        <el-select v-model="model.meta.breadcrumb">
+          <el-option label="显示" :value="true"></el-option>
+          <el-option label="隐藏" :value="false"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item :label-width="labelWidth" prop="meta.affix">
+        <span slot="label" style="text-transform:capitalize;"
+          >affix
+          <tips
+            placement="top"
+            html-content="此页面是否在标签页固定，固定下无法关闭，默认不固定"
+        /></span>
+        <el-select v-model="model.meta.affix">
+          <el-option label="固定" :value="true"></el-option>
+          <el-option label="不固定" :value="false"></el-option>
+        </el-select>
+      </el-form-item>
+    </template>
   </el-form>
 </template>
 <script>
@@ -205,7 +212,14 @@ export default {
         }
       ]
     };
-    return {};
+    return {
+      showOtherConfig: false
+    };
+  },
+  methods: {
+    showOtherConfigFun() {
+      this.showOtherConfig = true;
+    }
   },
   filters: {
     formatIcon(v) {
@@ -215,9 +229,26 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@import "~@/styles/variables.less";
+
 .route-form {
   /deep/.el-select {
     width: 100%;
+  }
+  .other-config {
+    width: 100%;
+    padding: 5px 0px;
+    transition: all 0.28s;
+    border: 1px dashed @menuText;
+    box-sizing: border-box;
+    color: @menuText;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover {
+      color: @base-color-default;
+      border-color: @base-color-default;
+    }
   }
 }
 </style>
