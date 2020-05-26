@@ -25,20 +25,17 @@
     </keep-alive>
     <div class="step-form--events">
       <el-button
-        @click="preStep"
-        v-if="active != 0 && active != data.length - 1"
-        >上一步</el-button
-      >
-      <el-button @click="nexStep" type="primary" v-if="nexStepVisible"
-        >下一步</el-button
-      >
-      <el-button
         @click="submit"
-        v-if="active == 1"
+        v-if="active == submitActive"
         :loading="submitLoading"
         type="success"
         >提交</el-button
       >
+      <el-button @click="preStep" v-if="preStepVisible">上一步</el-button>
+      <el-button @click="nexStep" type="primary" v-if="nexStepVisible"
+        >下一步</el-button
+      >
+
       <slot name="other" :active="active"></slot>
     </div>
   </div>

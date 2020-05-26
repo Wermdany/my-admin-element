@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve --open",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "service": "node ./service/index",
     "build:report": "vue-cli-service build --report",
@@ -39,6 +39,7 @@
     "koa2-cors": "^2.0.6",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
+    "mockjs": "^1.1.0",
     "prettier": "^1.18.2",
     "vue-template-compiler": "^2.6.10"
   }

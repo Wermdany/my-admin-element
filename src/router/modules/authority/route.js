@@ -24,10 +24,42 @@ const authority = [
         path: "auth",
         name: "authorityAuth",
         component: "auth",
+        redirect: "/authority/auth/list",
         meta: {
           title: "权限管理",
           icon: "set-up"
-        }
+        },
+        children: [
+          {
+            path: "list",
+            name: "authorityAuthList",
+            component: "authList",
+            meta: {
+              title: "权限列表",
+              icon: "set-up"
+            }
+          },
+          {
+            path: "add",
+            name: "authorityAuthAdd",
+            hidden: true,
+            component: "authAdd",
+            meta: {
+              title: "权限新增",
+              icon: "set-up"
+            }
+          },
+          {
+            path: "edit/:id(\\d+)",
+            name: "authorityAuthEdit",
+            hidden: true,
+            component: "authEdit",
+            meta: {
+              title: "权限编辑",
+              icon: "set-up"
+            }
+          }
+        ]
       },
       {
         path: "route",

@@ -18,12 +18,13 @@
             type="primary"
             v-if="active == stepData.length - 1"
             @click="again"
-            >再来一单</el-button
           >
+            再来一单
+          </el-button>
           <el-button v-if="active == stepData.length - 1">查看详细</el-button>
         </template>
-      </step-form></el-col
-    >
+      </step-form>
+    </el-col>
   </div>
 </template>
 <script>

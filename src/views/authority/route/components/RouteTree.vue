@@ -1,6 +1,7 @@
 <template>
   <div class="route-tree">
     <el-input
+      v-if="useSearch"
       class="search"
       clearable
       v-model="searchKeyWord"
@@ -10,7 +11,8 @@
     <el-tree
       v-bind="$attrs"
       :props="treeConfig"
-      node-key="path"
+      :node-key="nodeKey"
+      :show-checkbox="useType == 'select'"
       highlight-current
       :filter-node-method="filterRoutes"
       @node-drop="nodeDrop"
@@ -26,7 +28,7 @@
             ></i
             >{{ data.meta.title }}</span
           >
-          <template v-if="useType === 'cat' || useType === 'select'">
+          <template v-if="useType === 'cat'">
             <i
               class="el-icon-view tree-item--cat"
               :title="'查看[$]详细' | format(data)"
@@ -93,14 +95,18 @@ export default {
     elPopover: Popover
   },
   props: {
-    searchWord: {
-      type: String,
-      default: ""
-    },
     useType: {
       type: String,
       default: "cat",
       validator: val => ["cat", "edit", "select"].indexOf(val) !== -1
+    },
+    useSearch: {
+      type: Boolean,
+      default: true
+    },
+    nodeKey: {
+      type: String,
+      default: "path"
     }
   },
   mixins: [RouteTreeMixins],
@@ -143,8 +149,29 @@ export default {
         this["$_node" + type](formNode, selectNode, all);
       }
     },
+    //refs 根据 data 获取 node
     getTreeNode(data) {
       return this.$refs.Tree.getNode(data);
+    },
+    // refs select  通过node设置选中
+    setSelectedByNode(node) {
+      this.$refs.Tree.setCheckedNodes(node);
+    },
+    // refs select  通过key设置选中
+    setSelectedByKey(keys) {
+      this.$refs.Tree.setCheckedKeys(keys);
+    },
+    // refs select 获取选中node
+    getSelectedNode() {
+      return this.$refs.Tree.getCheckedNodes();
+    },
+    // refs select 获取选中key
+    getSelectedKey() {
+      return this.$refs.Tree.getCheckedKeys();
+    },
+    //重置
+    resetSelected() {
+      this.$refs.Tree.setCheckedKeys([]);
     }
   },
   filters: {

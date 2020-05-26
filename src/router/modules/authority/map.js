@@ -10,5 +10,17 @@ export default {
   auth: {
     component: () => import("@/views/authority/auth"),
     introduce: "权限组设置"
+  },
+  authList: {
+    component: () => import("@/views/authority/auth/list"),
+    introduce: "权限组列表"
+  },
+  authAdd: {
+    component: () => import("@/views/authority/auth/add"),
+    introduce: "权限组新增"
+  },
+  authEdit: {
+    component: () => import("@/views/authority/auth/edit"),
+    introduce: "权限组修改"
   }
 };

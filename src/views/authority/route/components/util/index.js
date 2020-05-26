@@ -18,13 +18,14 @@ export function pythonTitle(Node) {
  * 格式化路由表
  *
  * @export
- * @param {*} module
+ * @param {*} module 总
+ * @param {} del 删除的模块名
  * @returns
  */
-export function formatModulesToAll(module) {
+export function formatModulesToAll(module, del) {
   let res = [];
   for (const key in module) {
-    if (module.hasOwnProperty(key)) {
+    if (module.hasOwnProperty(key) && key !== del) {
       res = res.concat(module[key]);
     }
   }

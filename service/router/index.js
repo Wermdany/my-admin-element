@@ -3,6 +3,7 @@ const messageController = require("../controller/messageController");
 const userLogin = require("../controller/user/userLogin");
 const dataRouter = require("./data");
 const route = require("../controller/user/router");
+const Mock = require("mockjs");
 const router = new Router();
 dataRouter(router);
 router.get("/", async ctx => {
@@ -25,5 +26,8 @@ router.post("/logout", async ctx => {
 });
 router.post("/router", async ctx => {
   await route(ctx);
+});
+router.post("/auth", async ctx => {
+  await require("../controller/authority/auth")(ctx);
 });
 module.exports = router;

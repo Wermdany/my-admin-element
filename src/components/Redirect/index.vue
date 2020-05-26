@@ -13,8 +13,14 @@ export default {
   name: "Redirect",
   methods: {
     refreshPage() {
-      this.$router.replace({
-        path: "/redirect" + this.$route.fullPath
+      const view = this.$route;
+      this.$store.dispatch("tagsView/delCachedView", view).then(() => {
+        const { fullPath } = view;
+        this.$nextTick(() => {
+          this.$router.replace({
+            path: "/redirect" + fullPath
+          });
+        });
       });
     }
   },

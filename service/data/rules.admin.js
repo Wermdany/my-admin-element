@@ -1,33 +1,5 @@
 module.exports = [
   {
-    path: "/admin",
-    component: "common_main",
-    redirect: "/admin/dfg",
-    meta: {
-      title: "超级管理员",
-      icon: "user",
-      introduce: "管理员"
-    },
-    children: [
-      {
-        path: "dfg",
-        name: "dfg",
-        component: "common_index",
-        meta: { title: "超级1", icon: "eleme", introduce: "超级1页面" }
-      },
-      {
-        path: "qw",
-        name: "qw",
-        component: "common_index",
-        meta: {
-          title: "超级2",
-          icon: "eleme",
-          introduce: "超级2页面"
-        }
-      }
-    ]
-  },
-  {
     path: "/components",
     name: "components",
     redirect: "/components/sticky",
@@ -45,7 +17,7 @@ module.exports = [
         component: "components_sticky",
         meta: {
           icon: "",
-          title: "黏着",
+          title: "吸附组件",
           introduce: "页面滚动，固定到一定位置"
         }
       }
@@ -108,10 +80,42 @@ module.exports = [
         path: "auth",
         name: "authorityAuth",
         component: "authority_auth",
+        redirect: "/authority/auth/list",
         meta: {
           title: "权限管理",
           icon: "set-up"
-        }
+        },
+        children: [
+          {
+            path: "list",
+            name: "authorityAuthList",
+            component: "authority_authList",
+            meta: {
+              title: "权限列表",
+              icon: "set-up"
+            }
+          },
+          {
+            path: "add",
+            name: "authorityAuthAdd",
+            hidden: true,
+            component: "authority_authAdd",
+            meta: {
+              title: "权限新增",
+              icon: "set-up"
+            }
+          },
+          {
+            path: "edit/:id(\\d+)",
+            name: "authorityAuthEdit",
+            hidden: true,
+            component: "authority_authEdit",
+            meta: {
+              title: "权限编辑",
+              icon: "set-up"
+            }
+          }
+        ]
       },
       {
         path: "route",

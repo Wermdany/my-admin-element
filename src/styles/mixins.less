@@ -26,3 +26,35 @@
      overflow: hidden;
    }
  }
+
+ .bottomFixed(@a) {
+   .hidden-sidebar {
+
+     @a {
+       width: calc(100% - @sideBarHiddenWidth);
+     }
+   }
+
+
+   .app-wrapper.mobile {
+
+     @a {
+       width: 100%;
+     }
+   }
+
+
+
+   @a {
+     position: fixed;
+     bottom: 0;
+     right: 0;
+     width: calc(100% - @sideBarWidth);
+     background: #fff;
+     margin-top: 20px;
+     padding: 10px 0;
+     transition: all 0.28s;
+     text-align: center;
+   }
+
+ }
