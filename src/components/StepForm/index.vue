@@ -102,9 +102,12 @@ export default {
     mergeModel() {
       this.allData = merge(this.allData, this.$refs.Form.$data.model);
     },
-    submit() {
-      this.submitLoading = true;
-      this.$emit("form-submit", this.allData, this.nextDone);
+    async submit() {
+      if (await this.validator()) {
+        this.mergeModel();
+        this.submitLoading = true;
+        this.$emit("form-submit", this.allData, this.nextDone);
+      }
     },
     nextDone() {
       this.submitLoading = false;

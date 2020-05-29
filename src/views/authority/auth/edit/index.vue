@@ -9,11 +9,11 @@
     >
       <base-form ref="BaseForm" />
       <auth-form ref="AuthForm" />
-      <div class="authority-auth--footer">
-        <el-button type="primary" @click="submit">完成</el-button>
-        <el-button>清空</el-button>
-      </div>
     </el-col>
+    <div class="authority-auth--footer">
+      <el-button type="primary" @click="submit">完成</el-button>
+      <el-button @click="reset">清空</el-button>
+    </div>
   </div>
 </template>
 <script>
@@ -56,10 +56,24 @@ export default {
         }
       });
     },
-    submit() {
-      const node = this.$refs.AuthForm.getNode();
+    async submit() {
+      const baseRes = await this.$refs.BaseForm.valid();
+      const nodeRes = await this.$refs.AuthForm.valid();
+      const node = this.$refs.AuthForm.model;
       const model = this.$refs.BaseForm.model;
-      console.log(Object.assign({}, { route: node }, model));
+      if (baseRes && nodeRes) {
+        console.log(Object.assign({}, node, model));
+      } else {
+        this.$notify({
+          title: "警告",
+          message: "请按要求填写必填字段",
+          type: "warning"
+        });
+      }
+    },
+    reset() {
+      this.$refs.AuthForm.reset();
+      this.$refs.BaseForm.reset();
     }
   },
   created() {
@@ -69,30 +83,33 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "~@/styles/variables.less";
+
+.authority-auth--edit {
+  height: 100vh;
+  .authority-auth--footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: @sideBarWidth;
+    box-shadow: 0 -1px 4px rgba(0, 21, 41, 0.08);
+    background: #fff;
+    padding: 10px 0;
+    transition: all 0.28s;
+    text-align: center;
+  }
+}
 .hidden-sidebar {
   .authority-auth--edit {
     .authority-auth--footer {
-      width: calc(100% - @sideBarHiddenWidth);
+      left: @sideBarHiddenWidth;
     }
   }
 }
 .app-wrapper.mobile {
   .authority-auth--edit {
     .authority-auth--footer {
-      width: 100%;
+      left: 0;
     }
-  }
-}
-.authority-auth--edit {
-  .authority-auth--footer {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    width: calc(100% - @sideBarWidth);
-    background: #fff;
-    padding: 10px 0;
-    transition: all 0.28s;
-    text-align: center;
   }
 }
 </style>

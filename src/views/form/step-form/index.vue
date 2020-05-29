@@ -75,7 +75,13 @@ export default {
     again() {
       console.log(this.$refs.StepForm);
       this.$refs.StepForm.resetStep();
+      this.$router.replace({ path: "/redirect" + this.$route.path });
     }
   }
 };
 </script>
+<style lang="less" scoped>
+.form-step-form {
+  position: relative;
+}
+</style>

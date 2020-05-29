@@ -17,6 +17,7 @@
       :filter-node-method="filterRoutes"
       @node-drop="nodeDrop"
       @getNode="getTreeNode"
+      @check="checkChange"
       ref="Tree"
     >
       <template slot-scope="{ data, node }">
@@ -163,7 +164,7 @@ export default {
     },
     // refs select 获取选中node
     getSelectedNode() {
-      return this.$refs.Tree.getCheckedNodes();
+      return this.$refs.Tree.getCheckedNodes(true, false);
     },
     // refs select 获取选中key
     getSelectedKey() {
@@ -172,6 +173,9 @@ export default {
     //重置
     resetSelected() {
       this.$refs.Tree.setCheckedKeys([]);
+    },
+    checkChange() {
+      this.$emit("selected-change");
     }
   },
   filters: {

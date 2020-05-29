@@ -91,8 +91,8 @@ export default {
   methods: {
     valid() {
       return new Promise(resolve => {
-        this.$refs.rules.validate(vaild => {
-          resolve(vaild);
+        this.$refs.rules.validate(valid => {
+          resolve(valid);
         });
       });
     }

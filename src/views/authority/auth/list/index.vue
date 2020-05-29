@@ -1,7 +1,9 @@
 <template>
   <div class="authority-auth--list">
     <div class="authority-auth--header">
-      <el-button type="primary" icon="el-icon-plus">新增</el-button>
+      <el-button type="primary" icon="el-icon-plus" @click="add"
+        >新增</el-button
+      >
     </div>
     <div class="authority-auth--body">
       <el-table :data="tableData">
@@ -86,6 +88,9 @@ export default {
     },
     editPath(index) {
       this.$router.push("/authority/auth/edit/" + (index + 1));
+    },
+    add() {
+      this.$router.push("/authority/auth/add");
     }
   },
   created() {

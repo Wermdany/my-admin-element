@@ -1,6 +1,6 @@
 <template>
   <div class="auth-form--base">
-    <el-form :model="model" :rules="rules">
+    <el-form :model="model" :rules="rules" ref="Form">
       <el-form-item label="权限名：" :label-width="labelWIdth" prop="name">
         <el-input v-model="model.name"></el-input>
       </el-form-item>
@@ -45,6 +45,18 @@ export default {
         detailed: ""
       }
     };
+  },
+  methods: {
+    valid() {
+      return new Promise(resolve => {
+        this.$refs.Form.validate(valid => {
+          resolve(valid);
+        });
+      });
+    },
+    reset() {
+      this.$refs.Form.resetFields();
+    }
   }
 };
 </script>
