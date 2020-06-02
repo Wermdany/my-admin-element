@@ -60,7 +60,7 @@ import {
 import { HTTP_PASS } from "@/namespace";
 import RouteTree from "@/views/authority/route/components/RouteTree";
 export default {
-  name: "authorityAuth",
+  name: "authorityAuthList",
   components: {
     elButton: Button,
     elTable: Table,
@@ -79,7 +79,7 @@ export default {
     request() {
       auth().then(res => {
         if (res.code == HTTP_PASS) {
-          this.tableData = res.data;
+          this.tableData = res.data.concat(res.data);
         }
       });
     },

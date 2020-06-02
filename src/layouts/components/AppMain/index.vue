@@ -16,7 +16,12 @@ export default {
   computed: {
     ...mapGetters(["cachedViews"]),
     key() {
-      return this.$route.path;
+      // 解决缓存创建
+      if (this.$route.matched.length > 2) {
+        return this.$route.matched[1].path;
+      } else {
+        return this.$route.path;
+      }
     }
   }
 };

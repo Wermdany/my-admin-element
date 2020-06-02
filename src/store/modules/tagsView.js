@@ -1,4 +1,113 @@
 import { NEVER_SHOW_TAG_VIEW_PAGES_NAME } from "@/namespace";
+
+// 拥有动态路由的可以开启多个
+const regex = /\/:\w+/g;
+/**
+ * 新增一个缓存节点
+ */
+function addCached({ cachedViews }, view) {
+  let { matched, name, path } = view;
+  if (!matched) return;
+  const format = formatMatched(matched, name, cachedViews, path);
+  mergeCached(cachedViews, format);
+}
+/**
+ *
+ * @param {*} param
+ * @param {*} view
+ */
+function removeCached({ cachedViews }, view) {
+  let { matched, name, path } = view;
+  if (!matched) return;
+  const format = formatMatched(matched, name, cachedViews, path);
+  delCached(cachedViews, format);
+}
+/**
+ * 把 matched 格式化为树形格式
+ * @param {Array} matched
+ * @param {String} name
+ */
+function formatMatched(matched, name, parent, path) {
+  let route = {
+    name: "",
+    parent
+  };
+  matched = matched.slice(1);
+  route.name = matched[0].name;
+  if (regex.test(matched[0].path)) {
+    route.many = true;
+  }
+  if (matched.length == 1) {
+    route.path = path;
+  }
+  if (matched[0].name !== name) {
+    route.children = [].concat(formatMatched(matched, name, route, path));
+  }
+  return route;
+}
+/**
+ * 合并 cache
+ */
+function mergeCached(all, format) {
+  let index = all.findIndex(v => v.name === format.name);
+  if (index == -1) {
+    all.push(format);
+  } else {
+    if (format.children && format.children.length) {
+      mergeCached(all[index].children, format.children[0]);
+    } else {
+      //如果是动态路由则可以添加多个，在销毁的时候只有全部关闭才会取消缓存
+      if (
+        format.many &&
+        format.path &&
+        all.findIndex(v => v.path === format.path) === -1
+      ) {
+        all.push(format);
+      }
+    }
+  }
+}
+
+function delCached(all, format) {
+  let index = all.findIndex(v => {
+    if (v.path && format.path) {
+      return v.name === format.name && v.path === format.path;
+    } else {
+      return v.name === format.name;
+    }
+  });
+  if (index == -1) {
+    return;
+  } else {
+    if (format.children && format.children.length) {
+      delCached(all[index].children, format.children[0]);
+    } else {
+      let parent = all[index].parent;
+      all.splice(index, 1);
+      if (!all.length && !Array.isArray(parent)) {
+        delParentCached(parent);
+      }
+    }
+  }
+}
+
+function delParentCached(parent) {
+  if (
+    !Array.isArray(parent.parent) &&
+    (parent.children.length == 1 || parent.children.length == 0)
+  ) {
+    delParentCached(parent.parent);
+  } else {
+    if (Array.isArray(parent.parent)) {
+      let index = parent.parent.findIndex(v => v.name === parent.name);
+      parent.parent.splice(index, 1);
+    } else {
+      let index = parent.children.findIndex(v => v.name === parent.name);
+      parent.children.splice(index, 1);
+    }
+  }
+}
+
 const state = {
   // page name
   cachedViews: [],
@@ -15,10 +124,8 @@ const mutations = {
   },
   ADD_CACHED_VIEW: (state, view) => {
     if (NEVER_SHOW_TAG_VIEW_PAGES_NAME.includes(view.name)) return;
-    if (state.cachedViews.includes(view.name)) return;
-    if (!view.meta.noCache) {
-      state.cachedViews.push(view.name);
-    }
+    if (view.meta.noCache) return;
+    addCached(state, view);
   },
   DEL_VISITED_VIEW: (state, view) => {
     for (const [i, v] of state.visitedViews.entries()) {
@@ -29,8 +136,9 @@ const mutations = {
     }
   },
   DEL_CACHED_VIEW: (state, view) => {
-    const index = state.cachedViews.indexOf(view.name);
-    index > -1 && state.cachedViews.splice(index, 1);
+    removeCached(state, view);
+    // const index = state.cachedViews.indexOf(view.name);
+    // index > -1 && state.cachedViews.splice(index, 1);
   },
   DEL_OTHERS_VISITED_VIEWs: (state, view) => {
     state.visitedViews = state.visitedViews.filter(v => {
@@ -38,15 +146,10 @@ const mutations = {
     });
   },
   DEL_OTHERS_CACHED_VIEWS: (state, view) => {
-    const index = state.cachedViews.indexOf(view.name);
-    if (index > -1) {
-      state.cachedViews = state.cachedViews.slice(index, index + 1);
-    } else {
-      state.cachedViews = [];
-    }
+    state.cachedViews = [];
+    addCached(state, view);
   },
   DEL_ALL_VISITED_VIEWS: state => {
-    console.log(state);
     const affix = state.visitedViews.filter(v => v.meta && v.meta.affix);
     state.visitedViews = affix;
   },

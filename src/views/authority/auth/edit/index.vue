@@ -47,7 +47,7 @@ export default {
         if (res.code == HTTP_PASS) {
           this.model = res.data[this.id - 1];
           this.$refs.BaseForm.model = {
-            name: this.model.name,
+            name: this.model.name || null,
             detailed: this.model.detailed
           };
           let arr = [];

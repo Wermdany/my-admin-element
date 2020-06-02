@@ -1,4 +1,3 @@
-import { isObject } from "@/utils/validate";
 /**
  * Promise 总是抛出 resolve
  * @param {Object} promiseObj promise 对象
@@ -53,9 +52,9 @@ export function alwayResolve(promiseObj) {
  * @param {Number} delay 延迟
  * @param {Boolean} immediate 是否立即执行
  */
-export function debounce(fn, delay, immediate) {
+export function debounce(fn, delay) {
   let timer = null;
-  return function () {
+  return function() {
     if (timer) {
       clearTimeout(timer);
       timer = setTimeout(fn, delay);
@@ -63,37 +62,4 @@ export function debounce(fn, delay, immediate) {
       timer = setTimeout(fn, delay);
     }
   };
-}
-/**
- *
- *
- * @export
- * @param {*} route
- * @returns
- */
-export function deepCopy(route) {
-  if (!Array.isArray(route))
-    throw new Error("类型错误：传入的路由表不是一个数组");
-  let res = [];
-  route.forEach(item => {
-    res.push(copyObject(item));
-  });
-  return res;
-}
-function copyObject(obj) {
-  if (isObject(obj)) {
-    let newObj = {};
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (key === "meta") {
-          newObj[key] = copyObject(obj[key]);
-        }
-        if (key === "children" && obj[key].length != 0) {
-          newObj[key] = deepCopyRoute(obj[key]);
-        }
-        newObj[key] = obj[key];
-      }
-    }
-    return newObj;
-  }
 }

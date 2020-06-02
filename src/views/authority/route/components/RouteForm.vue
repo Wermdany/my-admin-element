@@ -95,16 +95,16 @@
       </div></template
     >
     <template v-if="showOtherConfig">
-      <el-form-item :label-width="labelWidth" prop="meta.cache">
+      <el-form-item :label-width="labelWidth" prop="meta.noCache">
         <span slot="label" style="text-transform:capitalize;"
           >cache
           <tips
             placement="top"
             html-content="离开此页面是否缓存，不填写默认缓存页面<br/>只有在最底层才有效，如果一些页面不需要缓存，为提高性能应该设置它"
         /></span>
-        <el-select v-model="model.meta.cache">
-          <el-option label="缓存" :value="true"></el-option>
-          <el-option label="销毁" :value="false"></el-option>
+        <el-select v-model="model.meta.noCache">
+          <el-option label="缓存" :value="false"></el-option>
+          <el-option label="销毁" :value="true"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item :label-width="labelWidth" prop="hidden">

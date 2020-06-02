@@ -17,11 +17,11 @@ export default {
     title: "",
     // icon,使用 element内置font-icon，只需要填写名字，后续可能会拓展第三方或者svg-icon
     icon: "",
-    // 是否缓存页面
-    cache: true,
+    // 是否不缓存页面 只有在最底层有效
+    noCache: false,
     // 如果设置为false，则不会在breadcrumb面包屑中显示
     breadcrumb: true,
-    //固定在tagsViews
+    //固定在tagsViews , 只有首页会默认添加，其余只有在打开的时候才会出现
     affix: false,
     //页面的详细介绍
     introduce: ""

@@ -92,7 +92,8 @@ module.exports = [
             component: "authority_authList",
             meta: {
               title: "权限列表",
-              icon: "set-up"
+              icon: "set-up",
+              noCache: true
             }
           },
           {
