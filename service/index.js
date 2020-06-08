@@ -6,7 +6,7 @@ const app = new Koa();
 app.use(bodyParser());
 app.use(
   cors({
-    origin: function () {
+    origin: function() {
       return "*";
     },
     exposeHeaders: ["WWW-Authenticate", "Server-Authorization"],
@@ -19,6 +19,7 @@ app.use(
 app.use(router.routes());
 
 app.listen(7000);
+
 console.log("server is start at http://localhost:7000");
 
 module.exports = () => app;

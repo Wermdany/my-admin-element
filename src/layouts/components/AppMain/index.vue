@@ -17,7 +17,7 @@ export default {
     ...mapGetters(["cachedViews"]),
     key() {
       // 解决缓存创建
-      if (this.$route.matched.length > 2) {
+      if (this.$route.matched.length > 1) {
         return this.$route.matched[1].path;
       } else {
         return this.$route.path;

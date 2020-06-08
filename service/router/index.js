@@ -1,22 +1,20 @@
 const Router = require("koa-router");
-const messageController = require("../controller/messageController");
-const userLogin = require("../controller/user/userLogin");
 const dataRouter = require("./data");
-const route = require("../controller/user/router");
-const Mock = require("mockjs");
 const router = new Router();
+console.log(require("mockjs").Random.dataImage);
 dataRouter(router);
 router.get("/", async ctx => {
   ctx.body = "Hello World.";
 });
 
 router.get("/message", async ctx => {
-  await messageController(ctx);
+  await require("../controller/messageController")(ctx);
 });
 
 router.post("/login", async ctx => {
-  ctx.body = userLogin(ctx);
+  ctx.body = require("../controller/user/userLogin")(ctx);
 });
+
 router.post("/logout", async ctx => {
   ctx.body = {
     code: 0,
@@ -24,10 +22,17 @@ router.post("/logout", async ctx => {
     data: {}
   };
 });
+
 router.post("/router", async ctx => {
-  await route(ctx);
+  await require("../controller/user/router")(ctx);
 });
+
 router.post("/auth", async ctx => {
   await require("../controller/authority/auth")(ctx);
 });
+
+router.post("/user", async ctx => {
+  await require("../controller/authority/user")(ctx);
+});
+
 module.exports = router;

@@ -79,7 +79,7 @@ export default {
     request() {
       auth().then(res => {
         if (res.code == HTTP_PASS) {
-          this.tableData = res.data.concat(res.data);
+          this.tableData = res.data;
         }
       });
     },
