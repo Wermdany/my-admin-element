@@ -99,7 +99,11 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.authority-auth--header {
-  margin-bottom: 10px;
+@import "~@/styles/mixins.less";
+.authority-auth--list {
+  .box(15px, #fff);
+  .authority-auth--header {
+    margin-bottom: 10px;
+  }
 }
 </style>

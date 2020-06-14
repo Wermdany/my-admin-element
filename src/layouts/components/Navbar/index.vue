@@ -22,6 +22,7 @@ import User from "@/components/User";
 import Setting from "@/layouts/components/Settings";
 import HeaderSearch from "@/components/HeaderSearch";
 import { mapState } from "vuex";
+import { resizeEvent } from "@/utils";
 export default {
   name: "NavBar",
   components: {
@@ -42,6 +43,7 @@ export default {
   methods: {
     toggleClick() {
       this.$store.dispatch("app/toggleSideBar");
+      if (this.device !== "SM") resizeEvent();
     }
   }
 };

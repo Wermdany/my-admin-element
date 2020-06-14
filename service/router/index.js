@@ -1,7 +1,6 @@
 const Router = require("koa-router");
 const dataRouter = require("./data");
 const router = new Router();
-console.log(require("mockjs").Random.dataImage);
 dataRouter(router);
 router.get("/", async ctx => {
   ctx.body = "Hello World.";

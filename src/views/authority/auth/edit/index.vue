@@ -83,8 +83,9 @@ export default {
 </script>
 <style lang="less" scoped>
 @import "~@/styles/variables.less";
-
+@import "~@/styles/mixins.less";
 .authority-auth--edit {
+  .box(15px, #fff);
   height: 100vh;
   .authority-auth--footer {
     position: fixed;

@@ -78,3 +78,10 @@ export default {
   }
 };
 </script>
+<style lang="less" scoped>
+@import "~@/styles/mixins.less";
+.authority-auth--add {
+  .box(15px, #fff);
+  .clearFloat();
+}
+</style>

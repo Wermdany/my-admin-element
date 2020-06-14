@@ -41,4 +41,9 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+@import "~@/styles/mixins.less";
+.authority-route {
+  .box(15px, #fff);
+}
+</style>

@@ -81,7 +81,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+@import "~@/styles/mixins.less";
 .form-step-form {
-  position: relative;
+  .box(15px, #fff);
+  .clearFloat();
 }
 </style>

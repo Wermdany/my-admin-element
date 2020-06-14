@@ -1,5 +1,27 @@
 module.exports = [
   {
+    path: "/dashboard",
+    name: "dashboard",
+    redirect: "/dashboard/console",
+    component: "common_main",
+    alwaysShow: true,
+    meta: {
+      icon: "s-data",
+      title: "仪表盘"
+    },
+    children: [
+      {
+        path: "console",
+        name: "dashboardConsole",
+        component: "dashboard_console",
+        meta: {
+          icon: "help",
+          title: "主控台"
+        }
+      }
+    ]
+  },
+  {
     path: "/components",
     name: "components",
     redirect: "/components/sticky",

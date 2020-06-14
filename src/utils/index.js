@@ -63,3 +63,9 @@ export function debounce(fn, delay) {
     }
   };
 }
+
+export function resizeEvent() {
+  const e = document.createEvent("Event");
+  e.initEvent("resize", true, true);
+  window.dispatchEvent(e);
+}
