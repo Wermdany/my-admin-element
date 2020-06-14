@@ -1,26 +1,27 @@
 <template>
   <div class="tags-view-container">
-    <scroll-pane ref="scrollPane">
-      <router-link
-        v-for="tag in visitedViews"
-        :key="tag.path"
-        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
-        tag="span"
-        ref="tag"
-        :class="isActive(tag) ? 'active' : ''"
-        class="tags-view-item"
-        :title="tag.meta.introduce"
-        @click.middle.native="!isAffix(tag) ? closeSelectedTag(tag) : ''"
-        @contextmenu.prevent.native="openMenu(tag, $event)"
-      >
-        {{ tag.meta.title }}
-        <span
-          v-if="!isAffix(tag)"
-          class="el-icon-close"
-          @click.prevent.stop="closeSelectedTag(tag)"
-        />
-      </router-link>
-    </scroll-pane>
+    <div class="tags-view-box">
+      <scroll-pane ref="scrollPane">
+        <router-link
+          v-for="tag in visitedViews"
+          :key="tag.path"
+          :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
+          tag="span"
+          ref="tag"
+          :class="isActive(tag) ? 'active' : ''"
+          class="tags-view-item"
+          :title="tag.meta.introduce"
+          @click.middle.native="!isAffix(tag) ? closeSelectedTag(tag) : ''"
+          @contextmenu.prevent.native="openMenu(tag, $event)"
+          >{{ tag.meta.title
+          }}<span
+            v-if="!isAffix(tag)"
+            class="el-icon-close"
+            @click.prevent.stop="closeSelectedTag(tag)"
+          />
+        </router-link>
+      </scroll-pane>
+    </div>
     <ul
       v-show="visible"
       :style="{ left: left + 'px', top: top + 'px' }"

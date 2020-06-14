@@ -105,7 +105,7 @@ export function getDay() {
   const date = new Date();
   return [parseTime(date, "{y}-{m}-{d}"), parseTime(date, "{y}-{m}-{d}")];
 }
-
+//我们取周一为一周的第一天，周日为最后一天
 export function getWeek() {
   const date = new Date();
   const l = new Date(date.setDate(date.getDate() - date.getDay()));
