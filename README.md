@@ -2,6 +2,10 @@
 
 > 本项目是对 [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/) 源码研究的作品，对其中部分组件进行了修改，功能完善度会持续更新。
 
+## Demo
+
+[Demo](https://wermdany.github.io/my-admin-element/#/dashboard/console)
+
 ## 文件目录
 
 ``` tree
